@@ -1,0 +1,1497 @@
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tune-up Nutrition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 0;
+            background-color: transparent;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .navbar.scrolled {
+            padding: 15px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar.scrolled .logo {
+            font-size: 24px;
+            color: #2c5530;
+            text-shadow: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar.scrolled .nav-link {
+            color: #333;
+            text-shadow: none;
+        }
+
+        .nav-link:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .navbar.scrolled .nav-link:hover {
+            color: #2c5530;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        .navbar.scrolled .nav-link::after {
+            background-color: #2c5530;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .hamburger {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .navbar.scrolled .hamburger {
+            background-color: #333;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active .hamburger:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%234CAF50;stop-opacity:1" /><stop offset="50%" style="stop-color:%2381C784;stop-opacity:1" /><stop offset="100%" style="stop-color:%23A5D6A7;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="800" fill="url(%23grad)"/><circle cx="200" cy="150" r="100" fill="rgba(255,255,255,0.1)"/><circle cx="800" cy="300" r="150" fill="rgba(255,255,255,0.05)"/><circle cx="1000" cy="600" r="120" fill="rgba(255,255,255,0.08)"/><path d="M0,400 Q300,200 600,400 T1200,400 V800 H0 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: #2c5530;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            box-shadow: 0 8px 25px rgba(44, 85, 48, 0.3);
+        }
+
+        .cta-button:hover {
+            background-color: #1e3a21;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(44, 85, 48, 0.4);
+        }
+
+        /* Content Section */
+        .content {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2c5530;
+        }
+
+        .content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Section Background Variations */
+        #about {
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #about .content-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        #about .intro-text {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        #about .intro-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2c5530;
+        }
+
+        #about .intro-text p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        #about .detailed-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        #about .image-container {
+            flex-shrink: 0;
+        }
+
+        #about .circle-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(44, 85, 48, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #about .circle-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(44, 85, 48, 0.3);
+        }
+
+        #about .text-content {
+            flex: 1;
+        }
+
+        #about .text-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c5530;
+        }
+
+        #about .text-content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        #services {
+            background: #ffffff;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 1px 0 rgba(0,0,0,0.05);
+        }
+
+        #services .content-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        #services .intro-text {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        #services .intro-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2c5530;
+        }
+
+        #services .intro-text p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        #services .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            align-items: start;
+            margin-bottom: 80px;
+        }
+
+        #services .service-item {
+            text-align: center;
+        }
+
+        #services .service-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            box-shadow: 0 8px 25px rgba(44, 85, 48, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #services .service-circle:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(44, 85, 48, 0.25);
+        }
+
+        #services .service-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c5530;
+            margin-bottom: 15px;
+        }
+
+        #services .service-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Call to Action Section */
+        #services .cta-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(44, 85, 48, 0.1);
+        }
+
+        #services .cta-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c5530;
+            margin-bottom: 15px;
+        }
+
+        #services .cta-text {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        #services .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: #2c5530;
+            color: white;
+            text-decoration: none;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(44, 85, 48, 0.3);
+        }
+
+        #services .cta-button:hover {
+            background: #1e3a21;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(44, 85, 48, 0.4);
+        }
+
+        #services .cta-button::after {
+            content: '→';
+            margin-left: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        #services .cta-button:hover::after {
+            transform: translateX(4px);
+        }
+
+        #blog {
+            background: linear-gradient(135deg, #2c5530 0%, #1e3a21 100%);
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #blog .content-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        #blog .intro-text {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        #blog .intro-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        #blog .intro-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        #blog .blog-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        #blog .blog-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        #blog .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        #blog .blog-date {
+            font-size: 0.9rem;
+            color: #2c5530;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #blog .blog-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c5530;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            flex-grow: 1;
+        }
+
+        #blog .blog-teaser {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 2;
+        }
+
+        #blog .read-more {
+            display: inline-flex;
+            align-items: center;
+            color: #2c5530;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            margin-top: auto;
+        }
+
+        #blog .read-more:hover {
+            color: #1e3a21;
+        }
+
+        #blog .read-more::after {
+            content: '→';
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        #blog .read-more:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Visit Blog Card Styles */
+        #blog .visit-blog-card {
+            background: linear-gradient(135deg, #2c5530 0%, #4CAF50 100%);
+            color: white;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #blog .visit-blog-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="60" r="10" fill="rgba(255,255,255,0.05)"/><circle cx="85" cy="25" r="8" fill="rgba(255,255,255,0.08)"/></svg>');
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -20px) rotate(180deg); }
+        }
+
+        #blog .visit-blog-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        #blog .visit-blog-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        #blog .visit-blog-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        #blog .visit-blog-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        #blog .visit-blog-link {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        #blog .visit-blog-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        #blog .visit-blog-link::after {
+            content: '→';
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        #blog .visit-blog-link:hover::after {
+            transform: translateX(4px);
+        }
+
+        #contact {
+            background: linear-gradient(135deg, #4CAF50 0%, #81C784 50%, #A5D6A7 100%);
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="60" r="10" fill="rgba(255,255,255,0.05)"/><circle cx="85" cy="25" r="8" fill="rgba(255,255,255,0.08)"/></svg>');
+            pointer-events: none;
+        }
+
+        #contact .content-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        #contact h2 {
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        #contact p {
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #1e3a21 0%, #2c5530 100%);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #A5D6A7;
+        }
+
+        .footer-about p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #A5D6A7;
+        }
+
+        .contact-info {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-info p {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info p::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            background-size: contain;
+            flex-shrink: 0;
+        }
+
+        .contact-info .phone::before {
+            content: '📞';
+        }
+
+        .contact-info .email::before {
+            content: '✉️';
+        }
+
+        .contact-info .address::before {
+            content: '📍';
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #A5D6A7;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: #A5D6A7;
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: left 0.3s ease;
+                gap: 30px;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-link {
+                font-size: 24px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .navbar.scrolled .logo {
+                font-size: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            #about .content-inner {
+                padding: 80px 15px;
+            }
+
+            #about .intro-text {
+                margin-bottom: 40px;
+            }
+
+            #about .intro-text h2 {
+                font-size: 2rem;
+            }
+
+            #about .intro-text p {
+                font-size: 1.1rem;
+            }
+
+            #about .detailed-content {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+
+            #about .circle-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            #about .text-content h3 {
+                font-size: 1.6rem;
+            }
+
+            #about .text-content p {
+                font-size: 1rem;
+            }
+
+            #services .content-inner,
+            #blog .content-inner,
+            #contact .content-inner {
+                padding: 80px 15px;
+            }
+
+            #services .intro-text {
+                margin-bottom: 60px;
+            }
+
+            #services .intro-text h2 {
+                font-size: 2rem;
+            }
+
+            #services .intro-text p {
+                font-size: 1.1rem;
+            }
+
+            #services .services-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                margin-bottom: 60px;
+            }
+
+            #services .service-circle {
+                width: 180px;
+                height: 180px;
+            }
+
+            #services .service-title {
+                font-size: 1.3rem;
+            }
+
+            #services .service-description {
+                font-size: 0.95rem;
+            }
+
+            #services .cta-section {
+                padding: 30px;
+            }
+
+            #services .cta-title {
+                font-size: 1.6rem;
+            }
+
+            #services .cta-text {
+                font-size: 1rem;
+            }
+
+            #services .cta-button {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+
+            #blog .intro-text {
+                margin-bottom: 60px;
+            }
+
+            #blog .intro-text h2 {
+                font-size: 2rem;
+            }
+
+            #blog .intro-text p {
+                font-size: 1.1rem;
+            }
+
+            #blog .blog-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            #blog .blog-card {
+                padding: 25px;
+            }
+
+            #blog .blog-title {
+                font-size: 1.2rem;
+            }
+
+            #blog .blog-teaser {
+                font-size: 0.95rem;
+            }
+
+            #blog .visit-blog-title {
+                font-size: 1.3rem;
+            }
+
+            #blog .visit-blog-text {
+                font-size: 0.95rem;
+            }
+            .footer {
+                padding: 40px 0 20px;
+            }
+
+            .footer-container {
+                padding: 0 15px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin-bottom: 30px;
+            }
+
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .footer-about p {
+                font-size: 0.95rem;
+            }
+
+            .footer-links a {
+                font-size: 0.95rem;
+            }
+
+            .contact-info {
+                font-size: 0.95rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .navbar {
+                padding: 20px 0;
+            }
+
+            .navbar.scrolled {
+                padding: 12px 0;
+            }
+
+            #about .content-inner {
+                padding: 60px 15px;
+            }
+
+            #about .intro-text {
+                margin-bottom: 30px;
+            }
+
+            #about .intro-text h2 {
+                font-size: 1.8rem;
+            }
+
+            #about .intro-text p {
+                font-size: 1rem;
+            }
+
+            #about .detailed-content {
+                gap: 30px;
+            }
+
+            #about .circle-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            #about .text-content h3 {
+                font-size: 1.4rem;
+            }
+
+            #services .content-inner,
+            #blog .content-inner,
+            #contact .content-inner {
+                padding: 60px 15px;
+            }
+
+            #services .intro-text {
+                margin-bottom: 40px;
+            }
+
+            #services .intro-text h2 {
+                font-size: 1.8rem;
+            }
+
+            #services .intro-text p {
+                font-size: 1rem;
+            }
+
+            #services .services-grid {
+                gap: 40px;
+                margin-bottom: 40px;
+            }
+
+            #services .service-circle {
+                width: 160px;
+                height: 160px;
+            }
+
+            #services .service-title {
+                font-size: 1.2rem;
+            }
+
+            #services .cta-section {
+                padding: 25px;
+            }
+
+            #services .cta-title {
+                font-size: 1.4rem;
+            }
+
+            #services .cta-text {
+                font-size: 0.95rem;
+            }
+
+            #services .cta-button {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+
+            #blog .intro-text {
+                margin-bottom: 40px;
+            }
+
+            #blog .intro-text h2 {
+                font-size: 1.8rem;
+            }
+
+            #blog .intro-text p {
+                font-size: 1rem;
+            }
+
+            #blog .blog-cards {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            #blog .blog-card {
+                padding: 20px;
+            }
+
+            #blog .blog-title {
+                font-size: 1.1rem;
+            }
+
+            #blog .blog-teaser {
+                font-size: 0.9rem;
+            }
+
+            #blog .visit-blog-title {
+                font-size: 1.2rem;
+            }
+
+            #blog .visit-blog-text {
+                font-size: 0.9rem;
+            }
+
+            .footer {
+                padding: 30px 0 15px;
+            }
+
+            .footer-content {
+                gap: 25px;
+                margin-bottom: 25px;
+            }
+
+            .footer-section h3 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+
+            .social-links a {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Tune-up Nutrition</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            
+            <button class="menu-toggle" id="mobile-menu">
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Nourish Your Body, Transform Your Life</h1>
+            <p>Expert nutrition guidance tailored to your unique wellness journey</p>
+            <a href="#services" class="cta-button">Start Your Transformation</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="content" id="about">
+        <div class="content-inner">
+            <!-- Intro Section -->
+            <div class="intro-text">
+                <h2>About Tune-up Nutrition</h2>
+                <p>At Tune-up Nutrition, we believe that proper nutrition is the foundation of optimal health and vitality. Our mission is to empower individuals with the knowledge, tools, and support they need to make lasting dietary changes that enhance their overall well-being.</p>
+            </div>
+
+            <!-- Detailed Content with Image -->
+            <div class="detailed-content">
+                <div class="image-container">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><defs><radialGradient id='grad' cx='50%' cy='30%' r='70%'><stop offset='0%' style='stop-color:%23A5D6A7;stop-opacity:1' /><stop offset='50%' style='stop-color:%2381C784;stop-opacity:1' /><stop offset='100%' style='stop-color:%234CAF50;stop-opacity:1' /></radialGradient></defs><circle cx='150' cy='150' r='150' fill='url(%23grad)'/><ellipse cx='120' cy='120' rx='25' ry='30' fill='%23ffffff' opacity='0.9'/><ellipse cx='180' cy='120' rx='25' ry='30' fill='%23ffffff' opacity='0.9'/><circle cx='120' cy='120' r='12' fill='%232c5530'/><circle cx='180' cy='120' r='12' fill='%232c5530'/><path d='M 100 180 Q 150 220 200 180' stroke='%23ffffff' stroke-width='8' fill='none' stroke-linecap='round' opacity='0.9'/><path d='M 80 100 Q 100 80 120 100' stroke='%23ffffff' stroke-width='6' fill='none' stroke-linecap='round' opacity='0.7'/><path d='M 180 100 Q 200 80 220 100' stroke='%23ffffff' stroke-width='6' fill='none' stroke-linecap='round' opacity='0.7'/></svg>" 
+                         alt="Nutrition Expert" 
+                         class="circle-image">
+                </div>
+                <div class="text-content">
+                    <h3>Our Personalized Approach</h3>
+                    <p>With over a decade of experience in nutritional science and wellness coaching, our team understands that every individual's nutritional needs are unique. We don't believe in one-size-fits-all diet plans or quick fixes.</p>
+                    <p>Instead, we work closely with each client to develop sustainable eating habits that fit their lifestyle, preferences, and health goals. Our evidence-based approach combines the latest nutritional research with practical, real-world strategies that you can implement and maintain long-term.</p>
+                    <p>Whether you're looking to improve your energy levels, manage a health condition, or simply feel your best, we're here to guide you every step of the way on your wellness journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="content" id="services">
+        <div class="content-inner">
+            <!-- Intro Section -->
+            <div class="intro-text">
+                <h2>Our Services</h2>
+                <p>We offer comprehensive nutrition services designed to support you at every stage of your health journey. Our evidence-based approach ensures you receive personalized care that fits your unique needs and lifestyle.</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-circle" style="background: linear-gradient(135deg, #4CAF50 0%, #81C784 100%);">
+                        <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="25" r="12" fill="white" opacity="0.9"/>
+                            <rect x="40" y="40" width="20" height="30" rx="3" fill="white" opacity="0.9"/>
+                            <circle cx="35" cy="55" r="8" fill="white" opacity="0.7"/>
+                            <circle cx="65" cy="55" r="8" fill="white" opacity="0.7"/>
+                            <path d="M30 75 Q50 85 70 75" stroke="white" stroke-width="3" fill="none" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Personal Consultations</h3>
+                    <p class="service-description">One-on-one sessions with our certified nutritionists to create personalized meal plans and address your specific health goals.</p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-circle" style="background: linear-gradient(135deg, #2c5530 0%, #4CAF50 100%);">
+                        <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="30" width="60" height="45" rx="5" fill="white" opacity="0.9"/>
+                            <line x1="30" y1="45" x2="70" y2="45" stroke="#2c5530" stroke-width="2"/>
+                            <line x1="30" y1="55" x2="60" y2="55" stroke="#2c5530" stroke-width="2"/>
+                            <line x1="30" y1="65" x2="65" y2="65" stroke="#2c5530" stroke-width="2"/>
+                            <circle cx="75" cy="25" r="8" fill="white" opacity="0.8"/>
+                            <path d="M70 20 L75 25 L85 15" stroke="#2c5530" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Meal Planning</h3>
+                    <p class="service-description">Customized weekly meal plans with shopping lists, prep instructions, and recipes tailored to your dietary preferences and restrictions.</p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-circle" style="background: linear-gradient(135deg, #A5D6A7 0%, #4CAF50 100%);">
+                        <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="35" cy="35" r="15" fill="white" opacity="0.9"/>
+                            <circle cx="65" cy="35" r="15" fill="white" opacity="0.9"/>
+                            <circle cx="35" cy="65" r="15" fill="white" opacity="0.9"/>
+                            <circle cx="65" cy="65" r="15" fill="white" opacity="0.9"/>
+                            <path d="M25 50 Q50 30 75 50" stroke="white" stroke-width="4" fill="none" opacity="0.8"/>
+                            <circle cx="50" cy="50" r="8" fill="white" opacity="0.9"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Ongoing Support</h3>
+                    <p class="service-description">Regular check-ins, progress tracking, and continuous guidance to help you stay motivated and achieve lasting results.</p>
+                </div>
+            </div>
+
+            <!-- Call to Action Section -->
+            <div class="cta-section">
+                <h3 class="cta-title">Ready to Start Your Health Journey?</h3>
+                <p class="cta-text">Get detailed information about our programs, pricing options, and find the perfect plan that fits your needs and budget.</p>
+                <a href="#" class="cta-button">View Pricing & Package Details</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="content" id="blog">
+        <div class="content-inner">
+            <!-- Intro Section -->
+            <div class="intro-text">
+                <h2>Latest from Our Blog</h2>
+                <p>Stay updated with the latest nutrition tips, recipes, and wellness advice from our team of experts. Discover evidence-based strategies to enhance your health journey.</p>
+            </div>
+
+            <!-- Blog Cards -->
+            <div class="blog-cards">
+                <article class="blog-card">
+                    <div class="blog-date">March 15, 2025</div>
+                    <h3 class="blog-title">5 Simple Meal Prep Strategies for Busy Professionals</h3>
+                    <p class="blog-teaser">Learn how to maintain healthy eating habits even with a packed schedule using these time-saving preparation techniques.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-date">March 10, 2025</div>
+                    <h3 class="blog-title">Understanding Macronutrients: A Beginner's Guide</h3>
+                    <p class="blog-teaser">Discover the essential building blocks of nutrition and how to balance proteins, carbohydrates, and fats for optimal health.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-date">March 5, 2025</div>
+                    <h3 class="blog-title">Seasonal Eating: Spring Foods to Boost Your Energy</h3>
+                    <p class="blog-teaser">Explore how incorporating fresh spring produce can naturally enhance your energy levels and support your body's seasonal needs.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+
+                <article class="blog-card visit-blog-card">
+                    <div class="visit-blog-content">
+                        <div class="visit-blog-icon">📚</div>
+                        <h3 class="visit-blog-title">Explore More Articles</h3>
+                        <p class="visit-blog-text">Discover our complete collection of nutrition tips, recipes, and wellness guides.</p>
+                        <a href="#" class="visit-blog-link">Visit Full Blog</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="content" id="contact">
+        <div class="content-inner">
+            <h2>Get in Touch</h2>
+            <p>Ready to start your nutrition journey? Contact us today to schedule your consultation.</p>
+            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- About Section -->
+                <div class="footer-section footer-about">
+                    <h3>Tune-up Nutrition</h3>
+                    <p>Empowering individuals with personalized nutrition guidance to achieve optimal health and vitality. Our evidence-based approach helps you develop sustainable eating habits that fit your unique lifestyle.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">📘</a>
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="Twitter">🐦</a>
+                        <a href="#" title="LinkedIn">💼</a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Personal Consultations</a></li>
+                        <li><a href="#">Meal Planning</a></li>
+                        <li><a href="#">Ongoing Support</a></li>
+                        <li><a href="#">Group Programs</a></li>
+                        <li><a href="#">Online Courses</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p class="phone">+1 (555) 123-4567</p>
+                        <p class="email">hello@tuneupnutrition.com</p>
+                        <p class="address">123 Wellness Way<br>Brighton, CO 80601</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tune-up Nutrition. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on nav links
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll-based animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.content-inner');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize content animations
+        document.querySelectorAll('.content-inner').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run once on load
+    </script>
+</body>
+</html>
