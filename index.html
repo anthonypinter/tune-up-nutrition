@@ -170,6 +170,24 @@
             position: relative;
         }
 
+        /* Disable fixed background on mobile devices */
+@media (max-width: 768px) {
+    .hero {
+        background-attachment: scroll;
+        min-height: 100vh;
+        height: auto;
+    }
+}
+
+/* Additional mobile fix for very small screens */
+@media (max-width: 480px) {
+    .hero {
+        background-attachment: scroll;
+        background-position: center center;
+        min-height: 100vh;
+    }
+}
+
         .hero-content {
             text-align: center;
             color: white;
