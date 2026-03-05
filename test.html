@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tune Up Nutrition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #36384C;
+      --mid:   #465362;
+      --stone: #BFB8A9;
+      --linen: #E8E0D5;
+      --accent:#CE8523;
+      --white: #F7F3EE;
+      --gray:  #BFB8A9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 5vw;
+      background: rgba(54,56,76,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding: 14vh 5vw 8vh;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/1-small.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+
+    /* Dark overlay so text stays readable */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(54,56,76,0.82) 0%,
+        rgba(54,56,76,0.65) 55%,
+        rgba(54,56,76,0.25) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 620px;
+    }
+
+    .hero-eyebrow {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 11vw, 10rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeUp 0.7s 0.35s forwards;
+    }
+
+    .hero-title span { color: var(--accent); }
+
+    .hero-sub {
+      margin-top: 1.8rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 38ch;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.65s forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--black);
+      border: none;
+    }
+
+    .btn-primary:hover { box-shadow: 0 8px 24px rgba(206,133,35,0.3); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* placeholder label */
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+
+    /* Decorative accent line */
+    .accent-line {
+      width: 60px;
+      height: 2px;
+      background: var(--stone);
+      margin: 1.4rem 0;
+    }
+
+    /* ── TYPE SCALE ── */
+    /* eyebrow/label : 0.75rem / 500 / 0.2em tracked uppercase */
+    /* section h2    : clamp(3.5rem, 6vw, 6rem) Bebas Neue      */
+    /* body copy     : 1rem / 300                                */
+
+    /* ── SECTION COMMONS ── */
+    section { position: relative; }
+
+    .section-label {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    /* ── TRAIN HARD ── */
+    .train-hard {
+      background: var(--white);
+      color: var(--black);
+      padding: 8rem 5vw;
+    }
+
+    .train-hard-left { width: 100%; }
+
+    .train-hard h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      letter-spacing: 0.04em;
+      line-height: 0.95;
+      margin-bottom: 2.5rem;
+    }
+
+    .train-hard-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .train-hard-body p {
+      font-size: clamp(1.15rem, 2vw, 1.4rem);
+      font-weight: 300;
+      color: #465362;
+      line-height: 1.7;
+      margin-top: 1.5rem;
+    }
+
+    .train-hard p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #465362;
+      line-height: 1.75;
+    }
+
+    .train-hard-block {
+      width: 180px;
+      height: 220px;
+      background: var(--linen);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .train-hard-block .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .train-hard-block .stat-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(54,56,76,0.65);
+    }
+
+    /* ── WHO IS THIS FOR ── */
+    .who-section {
+      background: var(--black);
+      color: var(--white);
+      padding: 8rem 5vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .who-image-wrap {
+      position: relative;
+      height: 520px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .who-img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #465362 0%, #36384C 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+
+    .who-img-placeholder .placeholder-label { color: rgba(0,0,0,0.25); }
+
+    .who-content .section-label { color: var(--accent); }
+
+    .who-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: 0.03em;
+      color: var(--white);
+    }
+
+    .who-content p {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    .who-list {
+      list-style: none;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .who-list li {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--white);
+      padding: 0.6rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .who-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--linen);
+      flex-shrink: 0;
+    }
+
+    .who-list li:first-child { border-top: none; }
+
+    .helps-label { color: #BFB8A9; }
+    .helps-section {
+      background: var(--white);
+      color: var(--black);
+      padding: 8rem 5vw;
+    }
+
+    .helps-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+
+    .helps-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      letter-spacing: 0.04em;
+      line-height: 0.95;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 6px;
+      padding: 3rem 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover { transform: translateY(-6px); }
+
+    .card:first-child { background: var(--black); }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--linen);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-icon {
+      width: 48px; height: 48px;
+      background: rgba(200,240,67,0.12);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    .card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.06em;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+
+    .card-arrow {
+      margin-top: auto;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ── FOOTER CTA ── */
+    .footer-cta {
+      background: var(--black);
+      padding: 8rem 5vw;
+      text-align: center;
+    }
+
+    .footer-cta h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 7vw, 7rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-cta h2 span { color: var(--accent); }
+
+    .footer-cta p {
+      margin: 1.5rem auto;
+      max-width: 44ch;
+      color: var(--gray);
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .footer-cta .hero-ctas { justify-content: center; }
+
+    footer {
+      background: var(--mid);
+      padding: 2rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    footer p { font-size: 0.78rem; color: var(--gray); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* scroll-reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── ABOUT ── */
+    .about-section {
+      background: var(--linen);
+      color: var(--black);
+      padding: 8rem 5vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-content .section-label { color: var(--accent); }
+
+    .about-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      letter-spacing: 0.04em;
+      line-height: 0.95;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content .about-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .about-content .btn-dark {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      margin-top: 1rem;
+    }
+
+    .about-content .btn-dark:hover {
+      box-shadow: 0 8px 24px rgba(54,56,76,0.3);
+    }
+
+    .about-image-wrap {
+      position: relative;
+      height: 580px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .about-img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #BFB8A9 0%, #465362 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+
+    .about-img-placeholder .placeholder-label { color: rgba(255,255,255,0.4); }
+
+    /* ── LARGE SCREENS ── */
+    @media (min-width: 1400px) {
+      html { font-size: 18px; }
+
+      .hero-title { font-size: clamp(8rem, 10vw, 14rem); }
+      .hero-sub { font-size: 1.15rem; max-width: 44ch; }
+      .hero-content { max-width: 780px; }
+
+      .train-hard { padding: 10rem 7vw; }
+      .train-hard h2 { font-size: clamp(5rem, 6vw, 8rem); }
+      .train-hard-body p { font-size: clamp(1.2rem, 1.4vw, 1.6rem); }
+
+      .who-section { padding: 10rem 7vw; gap: 8rem; }
+      .who-content h2 { font-size: clamp(5rem, 6vw, 8rem); }
+      .who-list li { font-size: 1.15rem; }
+
+      .helps-section { padding: 10rem 7vw; }
+      .helps-section h2 { font-size: clamp(5rem, 6vw, 8rem); }
+      .card { padding: 3.5rem 2.5rem; }
+      .card h3 { font-size: 2.4rem; }
+      .card p { font-size: 1rem; }
+
+      .footer-cta { padding: 10rem 7vw; }
+      .footer-cta h2 { font-size: clamp(5rem, 8vw, 10rem); }
+      .footer-cta p { font-size: 1.15rem; max-width: 50ch; }
+
+      .btn { padding: 1rem 2.4rem; font-size: 0.9rem; }
+    }
+
+
+
+    /* Tablet */
+    @media (max-width: 900px) {
+      .who-section { grid-template-columns: 1fr; gap: 3rem; }
+      .who-image-wrap { height: 55vw; }
+      .about-section { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image-wrap { height: 55vw; }
+      .cards-grid { grid-template-columns: 1fr 1fr; }
+      .helps-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .train-hard-body { gap: 1rem; }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      /* Nav */
+      nav { padding: 1rem 5vw; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.72rem; }
+
+      /* Hero */
+      .hero { padding: 12vh 5vw 6vh; align-items: flex-end; min-height: 100svh; }
+      .hero-content { max-width: 100%; }
+      .hero-title { font-size: clamp(3.5rem, 16vw, 6rem); }
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { text-align: center; justify-content: center; }
+
+      /* Train hard */
+      .train-hard { padding: 5rem 5vw; }
+      .train-hard h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+      .train-hard-body { gap: 0.75rem; }
+      .train-hard-body p { font-size: 1rem; }
+
+      /* Who section */
+      .who-section { padding: 5rem 5vw; gap: 2.5rem; }
+      .who-image-wrap { height: 70vw; }
+      .who-content h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+      .who-list li { font-size: 0.95rem; }
+
+      /* About */
+      .about-section { padding: 5rem 5vw; gap: 2.5rem; }
+      .about-image-wrap { height: 70vw; }
+      .about-content h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+
+      /* Cards */
+      .cards-grid { grid-template-columns: 1fr; }
+      .helps-section { padding: 5rem 5vw; }
+      .helps-section h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+
+      /* Footer CTA */
+      .footer-cta { padding: 5rem 5vw; }
+      .footer-cta h2 { font-size: clamp(2.5rem, 10vw, 5rem); }
+      .footer-cta .hero-ctas { flex-direction: column; }
+      .footer-cta .hero-ctas .btn { text-align: center; justify-content: center; }
+
+      /* Footer */
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Tune Up Nutrition</div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#helps">Services</a></li>
+    <li><a href="#about">About</a></li>
+
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Performance Isn't Just Trained. It's Tuned.</p>
+    <h1 class="hero-title">Tune Up<br><span>Nutrition</span></h1>
+    <div class="accent-line"></div>
+    <p class="hero-sub">Evidence-based fueling strategies built for endurance athletes who want their nutrition as structured as their training.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary">Learn More</a>
+      <a href="#" class="btn btn-outline">Book Discovery Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- YOU TRAIN HARD -->
+<section class="train-hard reveal">
+  <div class="train-hard-left">
+    <p class="section-label">You Train Hard...</p>
+    <h2>Are You Fueling to Match It?</h2>
+  </div>
+  <div class="train-hard-body">
+    <p>Most endurance athletes train with structure, discipline, and intention, but their fueling rarely matches the demands of their training. They're stacking long rides, interval sessions, strength work, and race simulations on top of busy lives, yet relying on outdated carb fears, inconsistent hydration habits, or guesswork around recovery.</p>
+    <p>The result isn't a lack of fitness, it's unexplained fatigue, mid-ride energy crashes, GI distress on race day, stalled progress, or body composition shifts that don't align with performance goals. Many athletes assume they just need to "push harder," when in reality their physiology is under-supported.</p>
+    <p>Without a clear fueling framework aligned to training load, even the most dedicated athletes end up under-recovered, under-fueled, and leaving performance on the table.</p>
+  </div>
+</section>
+
+<!-- WHO IS THIS FOR -->
+<section class="who-section" id="who">
+  <div class="who-image-wrap reveal">
+    <div class="who-img-wrap reveal">
+      <img src="images/5.jpeg" alt="Taylor Brower, RD" style="width:100%; height:100%; object-fit:cover; object-position: center top;" />
+    </div>
+  </div>
+  <div class="who-content reveal">
+    <p class="section-label">Who Is This For?</p>
+    <h2>Endurance Athletes at Every Level</h2>
+    <ul class="who-list">
+      <li>Gravel, MTB, road & ultra cyclists</li>
+      <li>Masters athletes</li>
+      <li>Women navigating hormonal shifts</li>
+      <li>Athletes increasing training load</li>
+      <li>Athletes rebuilding from burnout or underfueling</li>
+    </ul>
+  </div>
+</section>
+
+<!-- HOW TUNE UP HELPS -->
+<section class="helps-section" id="helps">
+  <div class="helps-header reveal">
+    <div>
+      <p class="section-label helps-label">What We Offer</p>
+      <h2>How Tune Up Nutrition<br>Helps</h2>
+    </div>
+
+  </div>
+  <div class="cards-grid">
+    <div class="card reveal">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>1:1 Performance Nutrition</h3>
+      <p>Structured, data-informed fueling support.</p>
+      <span class="card-arrow">Learn more →</span>
+    </div>
+    <div class="card reveal" style="transition-delay:0.1s">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Online Course</h3>
+      <p>Coming soon!</p>
+      <span class="card-arrow">Learn more →</span>
+    </div>
+    <div class="card reveal" style="transition-delay:0.2s">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <h3>Race & Team Support</h3>
+      <p>Fueling strategy for events, clubs, and teams.</p>
+      <span class="card-arrow">Learn more →</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-content reveal">
+    <p class="section-label">About</p>
+    <h2>Taylor Brower, RD</h2>
+    <p class="about-title">Performance Dietitian & Endurance Athlete</p>
+    <p>Taylor is a Registered Dietitian with a passion for helping endurance athletes unlock their full potential through evidence-based nutrition. She understands the demands of long training blocks because she lives them — as both a practitioner and an athlete herself.</p>
+    <p>Her approach is practical, personalised, and grounded in physiology. No fad protocols, no one-size-fits-all plans — just smart fueling strategies that fit your training, your body, and your goals.</p>
+    <a href="#" class="btn btn-dark">Work With Taylor</a>
+  </div>
+  <div class="about-image-wrap reveal">
+    <img src="images/taylor.jpeg" alt="Taylor Brower, RD" style="width:100%; height:100%; object-fit:cover; object-position: center top;" />
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta reveal">
+  <h2>Ready for a <span>Tune Up?</span></h2>
+  <p style="color: var(--white); opacity: 0.75;">Book a free discovery call and we'll map out exactly what your training is missing.</p>
+  <div class="hero-ctas">
+    <a href="#" class="btn btn-primary">Book Discovery Call</a>
+    <a href="#" class="btn btn-outline" style="color:#f5f4f0; border-color:rgba(255,255,255,0.25)">Learn More</a>
+  </div>
+</section>
+
+<footer>
+  <p class="nav-logo" style="font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:#465362; letter-spacing:0.1em;">Tune Up Nutrition</p>
+  <p>© 2025 Tune Up Nutrition Coaching. All rights reserved.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Nav shrink on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 60 ? '0.9rem 5vw' : '1.4rem 5vw';
+  });
+</script>
+</body>
+</html>
