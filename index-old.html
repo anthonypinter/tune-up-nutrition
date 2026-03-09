@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tune-up Nutrition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            /* New color palette */
+            --cream: #eae5d7;
+            --purple: #37384c;
+            --gold: #ce862a;
+            --light-purple: #5a5c78;
+            --dark-purple: #2a2b3d;
+            --light-gold: #e6a855;
+            --dark-gold: #b8721e;
+        }
+
+
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 0;
+            background-color: transparent;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .navbar.scrolled {
+            padding: 15px 0;
+            background-color: var(--cream);
+            box-shadow: 0 2px 20px rgba(55, 56, 76, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .navbar.scrolled .logo {
+            font-size: 24px;
+            color: var(--purple);
+            text-shadow: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .navbar.scrolled .nav-link {
+            color: var(--purple);
+            text-shadow: none;
+        }
+
+        .navbar.scrolled .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        .navbar.scrolled .nav-link::after {
+            background-color: var(--gold);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .hamburger {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .navbar.scrolled .hamburger {
+            background-color: var(--purple);
+        }
+
+        .menu-toggle.active .hamburger:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active .hamburger:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(42, 43, 61, 0.7), rgba(55, 56, 76, 0.6)), url("images/1-small.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Disable fixed background on mobile devices */
+@media (max-width: 768px) {
+    .hero {
+        background-attachment: scroll;
+        min-height: 100vh;
+        height: auto;
+    }
+}
+
+/* Additional mobile fix for very small screens */
+@media (max-width: 480px) {
+    .hero {
+        background-attachment: scroll;
+        background-position: center center;
+        min-height: 100vh;
+    }
+}
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        .hero-tagline {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: var(--light-gold);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            animation: fadeInUp 0.8s ease-out;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 50px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            animation: fadeInUp 1s ease-out 0.1s both;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .hero-cta {
+            margin-top: 60px;
+            animation: fadeInUp 1.4s ease-out 0.7s both;
+        }
+
+        .cta-button {
+            font-family: 'Montserrat', sans-serif;
+            display: inline-block;
+            padding: 22px 45px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
+            color: var(--purple);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 12px 35px rgba(206, 134, 42, 0.4);
+            text-shadow: none;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 45px rgba(206, 134, 42, 0.6);
+            border-color: rgba(255, 255, 255, 0.5);
+            background: linear-gradient(135deg, var(--dark-gold) 0%, var(--gold) 100%);
+        }
+
+        /* Content Section */
+        .content {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Content Section Headers */
+        .content h2,
+        #about .hero-intro h2,
+        #services .intro-text h2,
+        #blog .intro-text h2,
+        #contact h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--purple);
+            font-weight: 700;
+        }
+
+        /* Content Paragraphs */
+        .content p,
+        #about .story-text p,
+        #about .who-intro,
+        #services .intro-text p,
+        #blog .intro-text p,
+        #contact p {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1.1rem;
+            color: var(--light-purple);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(135deg, var(--cream) 0%, #f4f0e5 100%);
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #about .content-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        #about .hero-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #about .hero-intro h2 {
+            font-size: 2.5rem;
+            color: var(--purple);
+        }
+
+        #about .hero-intro .tagline {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        #about .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: var(--purple);
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        #about .values-list .value-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--purple);
+            font-size: 1.1rem;
+        }
+
+        #about .values-list .value-desc {
+            font-family: 'Source Sans 3', sans-serif;
+            color: var(--light-purple);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        #about .athlete-types li {
+            font-family: 'Source Sans 3', sans-serif;
+            background: rgba(206, 134, 42, 0.1);
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            border-radius: 25px;
+            color: var(--purple);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        #about .final-cta h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 700;
+        }
+
+        #about .final-cta p {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        #about .personal-story {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        #about .story-image {
+            flex-shrink: 0;
+        }
+
+        #about .story-image img {
+            width: 350px;
+            height: 350px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 15px 40px rgba(55, 56, 76, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #about .story-image img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(55, 56, 76, 0.3);
+        }
+
+        #about .story-text {
+            flex: 1;
+        }
+
+        #about .story-text p {
+            font-size: 1.2rem;
+            color: var(--purple);
+            margin-bottom: 25px;
+        }
+
+        #about .story-text p:first-child {
+            font-size: 1.2rem;
+            color: var(--purple);
+            font-weight: 500;
+        }
+
+        /* Philosophy Section */
+        #about .philosophy {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            border-left: 5px solid var(--gold);
+            box-shadow: 0 8px 25px rgba(55, 56, 76, 0.1);
+        }
+
+        #about .philosophy p {
+            font-size: 1.2rem;
+            color: var(--purple);
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* Values and Who I Help Grid */
+        #about .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        #about .values-section,
+        #about .who-section {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(55, 56, 76, 0.1);
+        }
+
+        #about .section-title {
+            font-size: 1.8rem;
+            color: var(--purple);
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        #about .values-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        #about .values-list li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        #about .values-list li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        #about .values-list .value-title {
+            font-weight: 700;
+            color: var(--purple);
+            font-size: 1.1rem;
+        }
+
+        #about .values-list .value-desc {
+            color: var(--light-purple);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        #about .who-intro {
+            font-size: 1.1rem;
+            color: var(--light-purple);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        #about .athlete-types {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        #about .athlete-types li {
+            background: rgba(206, 134, 42, 0.1);
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            border-radius: 25px;
+            color: var(--purple);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        #about .struggles-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        #about .struggles-list li {
+            position: relative;
+            padding: 8px 0 8px 25px;
+            color: var(--light-purple);
+            font-size: 1rem;
+        }
+
+        #about .struggles-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* Call to Action */
+        #about .final-cta {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--light-purple) 100%);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 15px 40px rgba(55, 56, 76, 0.3);
+        }
+
+        #about .final-cta h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        #about .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        #about .final-cta .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--purple);
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        #about .final-cta .cta-button:hover {
+            background: var(--light-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Services Section */
+        #services {
+            background: #ffffff;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 1px 0 rgba(55, 56, 76, 0.05);
+        }
+
+        #services .content-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        #services .intro-text {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        #services .intro-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--purple);
+        }
+
+        #services .intro-text p {
+            font-size: 1.2rem;
+            color: var(--light-purple);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        #services .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            align-items: start;
+            margin-bottom: 80px;
+        }
+
+        #services .service-item {
+            text-align: center;
+        }
+
+        #services .service-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            box-shadow: 0 8px 25px rgba(55, 56, 76, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            font-size: 100px;
+        }
+
+        #services .service-circle:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(55, 56, 76, 0.25);
+        }
+
+        #services .service-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--purple);
+            margin-bottom: 15px;
+        }
+
+        #services .service-description {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1rem;
+            color: var(--light-purple);
+            line-height: 1.6;
+        }
+
+        #services .cta-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--purple);
+            margin-bottom: 15px;
+        }
+
+        #services .cta-text {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1.1rem;
+            color: var(--light-purple);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        #services .cta-button {
+            font-family: 'Montserrat', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            background: var(--gold);
+            color: var(--purple);
+            text-decoration: none;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(206, 134, 42, 0.3);
+        }
+
+        /* Call to Action Section */
+        #services .cta-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--cream) 0%, #f4f0e5 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(55, 56, 76, 0.1);
+        }
+
+        #services .cta-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--purple);
+            margin-bottom: 15px;
+        }
+
+        #services .cta-text {
+            font-size: 1.1rem;
+            color: var(--light-purple);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        #services .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: var(--gold);
+            color: var(--purple);
+            text-decoration: none;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(206, 134, 42, 0.3);
+        }
+
+        #services .cta-button:hover {
+            background: var(--light-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(206, 134, 42, 0.4);
+        }
+
+        #services .cta-button::after {
+            content: '→';
+            margin-left: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        #services .cta-button:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Blog Section */
+        #blog {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--dark-purple) 100%);
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #blog .content-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        #blog .intro-text {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        #blog .intro-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        #blog .intro-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        #blog .placeholder-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        #blog .placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        #blog .placeholder-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        #blog .placeholder-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        #blog .coming-soon {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--light-gold));
+            color: var(--purple);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 50%, var(--dark-gold) 100%);
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="60" r="10" fill="rgba(255,255,255,0.05)"/><circle cx="85" cy="25" r="8" fill="rgba(255,255,255,0.08)"/></svg>');
+            pointer-events: none;
+        }
+
+        #contact .content-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        #contact h2 {
+            color: var(--purple);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        #contact p {
+            color: var(--purple);
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--purple) 100%);
+            color: white;
+            padding: 0px 0 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--light-gold);
+        }
+
+        .footer-about p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--light-gold);
+        }
+
+        .contact-info {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-info p {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--light-gold);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation styles */
+        .content-inner {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(234, 229, 215, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: left 0.3s ease;
+                gap: 30px;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu .nav-link {
+                color: var(--purple);
+                text-shadow: none;
+            }
+
+            .nav-link {
+                font-size: 24px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .navbar.scrolled .logo {
+                font-size: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            #about .content-inner {
+                padding: 80px 15px;
+            }
+
+            #about .hero-intro {
+                margin-bottom: 40px;
+            }
+
+            #about .hero-intro h2 {
+                font-size: 2rem;
+            }
+
+            #about .hero-intro .tagline {
+                font-size: 1.1rem;
+            }
+
+            #about .personal-story {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+                margin-bottom: 60px;
+            }
+
+            #about .story-image img {
+                width: 250px;
+                height: 250px;
+            }
+
+            #about .story-text p:first-child {
+                font-size: 1.1rem;
+            }
+
+            #about .story-text p {
+                font-size: 1rem;
+            }
+
+            #about .philosophy {
+                padding: 35px;
+            }
+
+            #about .philosophy p {
+                font-size: 1.1rem;
+            }
+
+            #about .two-column-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            #about .values-section,
+            #about .who-section {
+                padding: 30px;
+            }
+
+            #about .section-title {
+                font-size: 1.6rem;
+            }
+
+            #about .final-cta {
+                padding: 35px;
+            }
+
+            #about .final-cta h3 {
+                font-size: 1.7rem;
+            }
+
+            #about .final-cta p {
+                font-size: 1.1rem;
+            }
+
+            #services .content-inner,
+            #blog .content-inner,
+            #contact .content-inner {
+                padding: 80px 15px;
+            }
+
+            #services .intro-text {
+                margin-bottom: 60px;
+            }
+
+            #services .intro-text h2 {
+                font-size: 2rem;
+            }
+
+            #services .intro-text p {
+                font-size: 1.1rem;
+            }
+
+            #services .services-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                margin-bottom: 60px;
+            }
+
+            #services .service-circle {
+                width: 180px;
+                height: 180px;
+            }
+
+            #services .service-title {
+                font-size: 1.3rem;
+            }
+
+            #services .service-description {
+                font-size: 0.95rem;
+            }
+
+            #services .cta-section {
+                padding: 30px;
+            }
+
+            #services .cta-title {
+                font-size: 1.6rem;
+            }
+
+            #services .cta-text {
+                font-size: 1rem;
+            }
+
+            #services .cta-button {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+
+            #blog .intro-text {
+                margin-bottom: 60px;
+            }
+
+            #blog .intro-text h2 {
+                font-size: 2rem;
+            }
+
+            #blog .intro-text p {
+                font-size: 1.1rem;
+            }
+
+            #blog .placeholder-content {
+                padding: 50px 30px;
+            }
+
+            #blog .placeholder-icon {
+                font-size: 3.5rem;
+                margin-bottom: 25px;
+            }
+
+            #blog .placeholder-title {
+                font-size: 1.7rem;
+            }
+
+            #blog .placeholder-text {
+                font-size: 1.1rem;
+            }
+
+            .footer {
+                padding: 40px 0 20px;
+            }
+
+            .footer-container {
+                padding: 0 15px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin-bottom: 30px;
+            }
+
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .footer-about p {
+                font-size: 0.95rem;
+            }
+
+            .footer-links a {
+                font-size: 0.95rem;
+            }
+
+            .contact-info {
+                font-size: 0.95rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-tagline {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .navbar {
+                padding: 20px 0;
+            }
+
+            .navbar.scrolled {
+                padding: 12px 0;
+            }
+
+            #about .content-inner {
+                padding: 60px 15px;
+            }
+
+            #about .hero-intro {
+                margin-bottom: 30px;
+            }
+
+            #about .hero-intro h2 {
+                font-size: 1.8rem;
+            }
+
+            #about .hero-intro .tagline {
+                font-size: 1rem;
+            }
+
+            #about .personal-story {
+                gap: 30px;
+            }
+
+            #about .story-image img {
+                width: 200px;
+                height: 200px;
+            }
+
+            #about .story-text p:first-child {
+                font-size: 1rem;
+            }
+
+            #services .content-inner,
+            #blog .content-inner,
+            #contact .content-inner {
+                padding: 60px 15px;
+            }
+
+            #services .intro-text {
+                margin-bottom: 40px;
+            }
+
+            #services .intro-text h2 {
+                font-size: 1.8rem;
+            }
+
+            #services .intro-text p {
+                font-size: 1rem;
+            }
+
+            #services .services-grid {
+                gap: 40px;
+                margin-bottom: 40px;
+            }
+
+            #services .service-circle {
+                width: 160px;
+                height: 160px;
+            }
+
+            #services .service-title {
+                font-size: 1.2rem;
+            }
+
+            #services .cta-section {
+                padding: 25px;
+            }
+
+            #services .cta-title {
+                font-size: 1.4rem;
+            }
+
+            #services .cta-text {
+                font-size: 0.95rem;
+            }
+
+            #services .cta-button {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+
+            #blog .intro-text {
+                margin-bottom: 40px;
+            }
+
+            #blog .intro-text h2 {
+                font-size: 1.8rem;
+            }
+
+            #blog .intro-text p {
+                font-size: 1rem;
+            }
+
+            #blog .placeholder-content {
+                padding: 40px 25px;
+            }
+
+            #blog .placeholder-icon {
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+
+            #blog .placeholder-title {
+                font-size: 1.5rem;
+            }
+
+            #blog .placeholder-text {
+                font-size: 1rem;
+            }
+
+            .footer {
+                padding: 30px 0 15px;
+            }
+
+            .footer-content {
+                gap: 25px;
+                margin-bottom: 25px;
+            }
+
+            .footer-section h3 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+
+            .social-links a {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Basic unordered list styling with new colors */
+        .styled-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding: 12px 0 12px 35px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--light-purple);
+            border-bottom: 1px solid rgba(206, 134, 42, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .styled-list li:last-child {
+            border-bottom: none;
+        }
+
+        .styled-list li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .styled-list li:hover {
+            color: var(--purple);
+            padding-left: 40px;
+            background: rgba(206, 134, 42, 0.05);
+            border-radius: 8px;
+        }
+
+        .styled-list.checkmark li::before {
+            content: '✓';
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .styled-list.arrows li::before {
+            content: '→';
+            color: var(--purple);
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .styled-list.compact li {
+            padding: 8px 0 8px 30px;
+            font-size: 1rem;
+        }
+
+        .styled-list.compact li::before {
+            font-size: 1rem;
+            top: 8px;
+        }
+
+        .styled-list.cards li {
+            background: rgba(234, 229, 215, 0.8);
+            border: 1px solid rgba(206, 134, 42, 0.2);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            padding: 20px 20px 20px 50px;
+            box-shadow: 0 2px 10px rgba(55, 56, 76, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .styled-list.cards li:hover {
+            background: rgba(234, 229, 215, 1);
+            box-shadow: 0 4px 20px rgba(55, 56, 76, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .styled-list.cards li::before {
+            left: 20px;
+            top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .styled-list li {
+                font-size: 1rem;
+                padding: 10px 0 10px 30px;
+            }
+            
+            .styled-list.cards li {
+                padding: 15px 15px 15px 40px;
+            }
+            
+            .styled-list.cards li::before {
+                left: 15px;
+                top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="logo">Tune Up Nutrition</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            
+            <button class="menu-toggle" id="mobile-menu">
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <p class="hero-tagline">Personalized nutrition coaching for endurance cyclists and athletes</p>
+            <h1>Tune Up Your Nutrition</h1>
+            
+            <div class="hero-cta">
+                <a href="#contact" class="cta-button">Get Your Nutrition Tune-Up</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="content-inner">
+            <!-- Hero Introduction -->
+            <div class="hero-intro">
+                <h2>Meet Taylor</h2>
+                <p class="tagline">Registered Dietitian & Endurance Athlete</p>
+            </div>
+
+            <!-- Personal Story -->
+            <div class="personal-story">
+                <div class="story-image">
+                    <img src="images/taylor.jpeg" alt="Taylor in cycling gear, enjoying a pastry stop">
+                </div>
+                <div class="story-text">
+                    <p>Hi, I'm Taylor Brower, a Registered Dietitian and endurance athlete. I founded <strong>Tune Up Nutrition</strong> because I saw too many cyclists and endurance athletes struggling with the same problems: bonking on long rides, under-fueling during training blocks, and feeling uncertain about what to eat before, during, and after their workouts.</p>
+                    
+                    <p>I've been there myself and I know firsthand how frustrating it is to pour hours into training, only to have your nutrition hold you back.</p>
+
+                    <p>Cyclists know the value of a good bike tune-up. You can have the best frame and the strongest legs, but if your gears are grinding or your brakes aren't aligned, your ride suffers. Nutrition is the same way: it's often the missing piece holding athletes back. <strong>Tune Up Nutrition</strong> is here to make sure your fueling is as dialed as your training plan and your bike setup.</p>
+                </div>
+            </div>
+
+            <!-- Values and Who I Help -->
+            <div class="two-column-grid">
+                <!-- Values Section -->
+                <div class="values-section">
+                    <h3 class="section-title">Values</h3>
+                    <ul class="values-list">
+                        <li>
+                            <div class="value-title">Performance without extremes</div>
+                            <div class="value-desc">No fad diets, no under-fueling, no gimmicks.</div>
+                        </li>
+                        <li>
+                            <div class="value-title">Empowerment through education</div>
+                            <div class="value-desc">Athletes leave with knowledge and confidence, not dependence.</div>
+                        </li>
+                        <li>
+                            <div class="value-title">Sustainability</div>
+                            <div class="value-desc">Plans fit into real life, not just race day.</div>
+                        </li>
+                        <li>
+                            <div class="value-title">Inclusivity</div>
+                            <div class="value-desc">Open to athletes of all levels, backgrounds, and body types.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Who I Help Section -->
+                <div class="who-section">
+                    <h3 class="section-title">Who I Help</h3>
+                    <p class="who-intro">I specialize in working with:</p>
+                    
+                    <ul class="athlete-types">
+                        <li>Cyclists training for centuries, fondos, gravel races, and stage races</li>
+                        <li>Athletes who feel lost about what/when/how much to eat</li>
+                        <li>Runners and multisport athletes who want to optimize fueling</li>
+                        <li>Athletes who want to stop bonking, cramping, or fading late in events</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Final Call to Action -->
+            <div class="final-cta">
+                <h3>Ready to Tune Up Your Nutrition?</h3>
+                <p>Your training is only as strong as your fueling. Let's make sure your nutrition is tuned up and ready for whatever ride, race, or adventure you're chasing.</p>
+                <a href="#contact" class="cta-button">Start Your Nutrition Tune-Up</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="content" id="services">
+        <div class="content-inner">
+            <!-- Intro Section -->
+            <div class="intro-text">
+                <h2>My Services</h2>
+                <p>My evidence-based approach ensures you receive personalized care that fits your unique needs and lifestyle. Services I offer include:</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-circle" style="background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);">
+                        🍎
+                    </div>
+                    <h3 class="service-title">1:1 Nutrition Coaching</h3>
+                    <p class="service-description">Custom fueling plans for training, race day, and recovery.</p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-circle" style="background: linear-gradient(135deg, var(--purple) 0%, var(--light-purple) 100%);">
+                        🥇
+                    </div>
+                    <h3 class="service-title">Race Fueling Strategy</h3>
+                    <p class="service-description">Deep dive into a specific event: route planning, aid station strategy, fueling timing.</p>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-circle" style="background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);">
+                        🗣️
+                    </div>
+                    <h3 class="service-title">Team / Group Talks</h3>
+                    <p class="service-description">Clinics or workshops for cycling clubs, teams, or training groups.</p>
+                </div>
+            </div>
+
+            <!-- Call to Action Section -->
+            <div class="cta-section">
+                <h3 class="cta-title">Ready for a Tune Up?</h3>
+                <a href="#contact" class="cta-button">Get in Touch!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog">
+        <div class="content-inner">
+            <!-- Intro Section -->
+            <div class="intro-text">
+                <h2>Nutrition Resources & Tips</h2>
+                <p>Expert insights on endurance fueling, race-day strategies, and performance nutrition coming soon.</p>
+            </div>
+
+            <!-- Placeholder Content -->
+            <div class="placeholder-content">
+                <div class="coming-soon">Coming Soon</div>
+                <div class="placeholder-icon">🚴‍♀️</div>
+                <h3 class="placeholder-title">Blog Posts in Development</h3>
+                <p class="placeholder-text">I'm working on valuable content covering race-day fueling strategies, training nutrition, recovery protocols, and practical tips for endurance athletes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="content" id="contact">
+        <div class="content-inner">
+            <h2>Get in Touch</h2>
+            <p>Ready to start your nutrition journey? Drop me your info, and I'll get in touch.</p>
+            <div data-tf-live="01K3AD2ZGZHW91RPP6DYA5FVNS" class="typeform"></div><script src="//embed.typeform.com/next/embed.js"></script>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tune-up Nutrition. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on nav links
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 60;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll-based animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.content-inner');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize content animations
+        document.querySelectorAll('.content-inner').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run once on load
+    </script>
+</body>
+</html>

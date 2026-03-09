@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services — Tune Up Nutrition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #36384C;
+      --mid:   #465362;
+      --stone: #BFB8A9;
+      --linen: #E8E0D5;
+      --accent:#CE8523;
+      --white: #F7F3EE;
+      --gray:  #BFB8A9;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 5vw;
+      background: rgba(54,56,76,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.12em; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--white); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    /* ── BUTTONS ── */
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--white); color: var(--black); border: 1px solid rgba(54,56,76,0.25); }
+    .btn-primary:hover { box-shadow: 0 8px 24px rgba(206,133,35,0.3); }
+    .btn-accent { background: var(--accent); color: var(--white); border: none; }
+    .btn-accent:hover { box-shadow: 0 8px 24px rgba(206,133,35,0.4); }
+    .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-outline-dark { background: transparent; color: var(--black); border: 1px solid rgba(54,56,76,0.35); }
+    .btn-outline-dark:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SHARED ── */
+    section { position: relative; }
+    .section-label { font-size: 1rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 80vh;
+      padding: 18vh 5vw 8vh;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('images/race-fuel.jpeg');
+      background-size: cover;
+      background-position: center 30%;
+      z-index: 0;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(54,56,76,0.90) 0%, rgba(54,56,76,0.65) 55%, rgba(54,56,76,0.25) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+    .hero-eyebrow { font-size: 1rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
+    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.5rem, 9vw, 9rem); line-height: 0.9; letter-spacing: 0.04em; color: var(--white); opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
+    .hero-title span { color: var(--accent); }
+    .hero-sub { margin-top: 1.8rem; font-size: 1rem; font-weight: 300; color: var(--gray); line-height: 1.7; max-width: 46ch; opacity: 0; animation: fadeUp 0.7s 0.48s forwards; }
+    .hero-cta { margin-top: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.6s forwards; }
+
+    /* ── LADDER INTRO ── */
+    .ladder-intro {
+      background: var(--black);
+      padding: 5rem 5vw;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .ladder-intro h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      letter-spacing: 0.06em;
+      color: var(--white);
+    }
+
+    /* ── SERVICE BLOCKS ── */
+    .service-block {
+      padding: 7rem 5vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .service-block.reverse { direction: rtl; }
+    .service-block.reverse > * { direction: ltr; }
+    .service-block.bg-white { background: var(--white); color: var(--black); }
+    .service-block.bg-dark { background: var(--black); color: var(--white); }
+
+    .service-image {
+      height: 520px;
+      border-radius: 4px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #465362 0%, #36384C 100%);
+      display: flex; align-items: flex-end; padding: 1.5rem;
+      position: sticky;
+      top: 7rem;
+    }
+    .service-image .placeholder-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+
+    .service-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5rem); letter-spacing: 0.04em; line-height: 0.95; margin-bottom: 0.5rem; }
+    .service-duration { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem; display: block; }
+    .service-content p { font-size: 1rem; font-weight: 300; line-height: 1.8; margin-bottom: 1rem; }
+    .service-content p.dark-text { color: #465362; }
+    .service-content p.light-text { color: var(--gray); }
+    .service-cta { margin-top: 2rem; }
+    .service-cta .btn { width: 100%; justify-content: center; }
+
+    /* ── INCLUDES LIST ── */
+    .includes-block { margin: 1.5rem 0; }
+    .includes-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .includes-label.dark { color: var(--mid); }
+    .includes-label.light { color: var(--stone); }
+
+    .includes-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .includes-list li { font-size: 0.92rem; font-weight: 300; line-height: 1.5; display: flex; align-items: flex-start; gap: 0.65rem; }
+    .includes-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 0.5em; }
+    .includes-list.dark-list li { color: #465362; }
+    .includes-list.light-list li { color: var(--gray); }
+
+    .best-for { margin-top: 1.5rem; padding: 1.25rem 1.5rem; border-radius: 4px; border-left: 2px solid var(--accent); }
+    .best-for.dark-bg { background: rgba(54,56,76,0.06); }
+    .best-for.light-bg { background: rgba(255,255,255,0.06); }
+    .best-for-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+    .best-for ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+    .best-for ul li { font-size: 0.9rem; font-weight: 300; line-height: 1.5; display: flex; align-items: flex-start; gap: 0.6rem; }
+    .best-for ul li::before { content: '→'; color: var(--accent); font-size: 0.8rem; flex-shrink: 0; margin-top: 0.1em; }
+    .best-for.dark-bg li { color: #465362; }
+    .best-for.light-bg li { color: var(--gray); }
+
+    .limited-tag { display: inline-block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(206,133,35,0.4); padding: 0.3rem 0.75rem; border-radius: 2px; margin-bottom: 1.5rem; }
+
+    /* ── TIER CARDS ── */
+    .tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
+    .tier-card { border-radius: 4px; padding: 1.75rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .tier-card.tier-foundations { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); }
+    .tier-card.tier-performance { background: rgba(206,133,35,0.1); border: 1px solid rgba(206,133,35,0.3); }
+    .tier-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.06em; color: var(--white); }
+    .tier-card .tier-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); }
+    .tier-card.tier-performance .tier-tag { color: var(--accent); }
+    .tier-card .tier-note { font-size: 0.82rem; font-weight: 300; color: var(--stone); line-height: 1.5; margin-top: 0.25rem; font-style: italic; }
+
+    /* ── MICRO ADJUST ── */
+    .micro-adjust { background: var(--mid); color: var(--white); padding: 7rem 5vw; }
+    .micro-adjust-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .micro-adjust h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5rem); letter-spacing: 0.04em; line-height: 0.95; margin-bottom: 0.5rem; }
+    .micro-adjust p { font-size: 1rem; font-weight: 300; color: var(--gray); line-height: 1.8; margin-bottom: 1rem; }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta { background: var(--black); padding: 7rem 5vw; text-align: center; }
+    .bottom-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 6rem); line-height: 0.95; letter-spacing: 0.04em; margin-bottom: 1.5rem; }
+    .bottom-cta h2 span { color: var(--accent); }
+    .bottom-cta p { font-size: 1rem; font-weight: 300; color: var(--gray); line-height: 1.7; max-width: 44ch; margin: 0 auto 2.5rem; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--black); padding: 2rem 5vw; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(206,133,35,0.35); }
+    footer p { font-size: 0.78rem; color: var(--gray); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (min-width: 1400px) {
+      html { font-size: 18px; }
+      .hero-title { font-size: clamp(6rem, 9vw, 11rem); }
+      .service-block { padding: 9rem 7vw; gap: 8rem; }
+      .micro-adjust { padding: 9rem 7vw; }
+      .bottom-cta { padding: 9rem 7vw; }
+    }
+
+    @media (max-width: 900px) {
+      .service-block { grid-template-columns: 1fr; gap: 3rem; }
+      .service-block.reverse { direction: ltr; }
+      .service-image { height: 55vw; position: static; }
+      .micro-adjust-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .tier-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 5vw; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.72rem; }
+      .hero { padding: 14vh 5vw 6vh; min-height: 65vh; }
+      .hero-title { font-size: clamp(3rem, 14vw, 5rem); }
+      .service-block { padding: 5rem 5vw; }
+      .service-image { height: 65vw; }
+      .micro-adjust { padding: 5rem 5vw; }
+      .bottom-cta { padding: 5rem 5vw; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Tune Up Nutrition</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Services</p>
+    <h1 class="hero-title">Performance <span>Nutrition.</span> Dialed.</h1>
+    <p class="hero-sub">Your fitness is built in training. Your performance is built in fueling. Most endurance athletes train with structure but fuel with guesswork. At Tune Up Nutrition, we treat your nutrition like your drivetrain: clean, aligned, and optimized for the terrain ahead.</p>
+
+  </div>
+</section>
+
+<!-- LADDER INTRO -->
+<div class="ladder-intro reveal">
+  <p class="section-label" style="text-align:center;">Where Do You Start?</p>
+  <h2>The Tune Up Ladder</h2>
+</div>
+
+<!-- FULL SYSTEM OVERHAUL -->
+<section class="service-block bg-white reveal" id="services">
+  <div class="service-image">
+    <span class="placeholder-label">Full Overhaul image</span>
+  </div>
+  <div class="service-content">
+    <p class="section-label">1:1 Performance Nutrition</p>
+    <h2>Full System Overhaul</h2>
+    <span class="service-duration" style="color: var(--mid);">12-Week Performance Build</span>
+    <span class="limited-tag">Limited Spots</span>
+    <p class="dark-text">For athletes ready to build long-term durability, energy stability, and training progression.</p>
+    <p class="dark-text">This 12-week program helps you build durable fueling systems that support your training, recovery, and long-term performance. Instead of quick fixes, we create repeatable strategies that make fueling automatic and sustainable.</p>
+
+    <div class="includes-block">
+      <p class="includes-label dark">Includes</p>
+      <ul class="includes-list dark-list">
+        <li>Initial diagnostic session</li>
+        <li>Bi-weekly strategy calls</li>
+        <li>Fuel log analysis and adjustments</li>
+        <li>Hydration and sweat strategy development</li>
+        <li>Long-ride fueling review</li>
+        <li>Ongoing messaging support</li>
+        <li>Custom fueling tools and templates</li>
+      </ul>
+    </div>
+
+    <div class="best-for dark-bg">
+      <p class="best-for-label">Best For Athletes Who</p>
+      <ul>
+        <li>Are building toward a major season</li>
+        <li>Feel inconsistent in energy or recovery</li>
+        <li>Want to increase training load safely</li>
+        <li>Suspect they may be under-fueling</li>
+      </ul>
+    </div>
+
+    <div class="service-cta">
+      <a href="#" class="btn btn-primary">Apply Here!</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRECISION RACE TUNE UP -->
+<section class="service-block bg-dark reverse reveal">
+  <div class="service-image" style="background: linear-gradient(160deg, #BFB8A9 0%, #465362 100%);">
+    <span class="placeholder-label">Race Tune Up image</span>
+  </div>
+  <div class="service-content">
+    <p class="section-label">Targeted Support</p>
+    <h2>Precision Race Tune-Up</h2>
+    <span class="service-duration">6-Week Race-Specific Plan</span>
+    <p class="light-text">For athletes preparing for a key event and wanting a clear, practiced fueling strategy.</p>
+    <p class="light-text">Two levels of support are available depending on how much guidance you want leading into race day.</p>
+
+    <div class="tier-grid">
+      <div class="tier-card tier-foundations">
+        <span class="tier-tag">Foundations</span>
+        <h3>Foundations</h3>
+        <ul class="includes-list light-list">
+          <li>Initial strategy session</li>
+          <li>Follow-up sessions to refine your plan</li>
+          <li>Personalized carb, hydration & sodium targets</li>
+          <li>Long-ride fueling troubleshooting</li>
+          <li>Race-day fueling timeline</li>
+        </ul>
+        <p class="tier-note">Best for athletes who want clarity and consistency heading into race season.</p>
+      </div>
+      <div class="tier-card tier-performance">
+        <span class="tier-tag">Performance</span>
+        <h3>Performance</h3>
+        <ul class="includes-list light-list">
+          <li>Full nutrition assessment</li>
+          <li>Strategy sessions across the training block</li>
+          <li>Carbohydrate periodization guidance</li>
+          <li>Gut training progression</li>
+          <li>Hydration and sodium optimization</li>
+          <li>Detailed race execution plan</li>
+        </ul>
+        <p class="tier-note">Best for athletes who want a fully rehearsed race fueling strategy.</p>
+      </div>
+    </div>
+    <div class="tier-grid" style="margin-top: 1rem;">
+      <a href="#" class="btn btn-outline" style="width:100%; justify-content:center;">Book Now</a>
+      <a href="#" class="btn btn-outline" style="width:100%; justify-content:center;">Book Now</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- RACE DAY MICRO-ADJUST -->
+<section class="micro-adjust reveal">
+  <div class="micro-adjust-inner">
+    <div class="service-content">
+      <p class="section-label">Quick Wins</p>
+      <h2>Race Day Micro-Adjust</h2>
+      <span class="service-duration" style="color: var(--stone);">Single Session Fueling Tune-Up</span>
+      <p>For athletes who need a strategic refinement before race day.</p>
+      <p>Sometimes your system is solid, it just needs a small adjustment. This focused session sharpens your race fueling plan so you can execute with confidence.</p>
+
+      <div class="includes-block">
+        <p class="includes-label light">During the Session We Will</p>
+        <ul class="includes-list light-list">
+          <li>Calculate carb-per-hour targets</li>
+          <li>Review hydration and sodium strategy</li>
+          <li>Refine caffeine use</li>
+          <li>Identify GI risk factors</li>
+          <li>Build a clear race execution plan</li>
+        </ul>
+      </div>
+
+      <p style="color: var(--stone); font-size: 0.95rem; font-style: italic; margin-bottom: 1rem;">You'll leave with clear numbers, a simple timeline, and confidence in your strategy.</p>
+
+      <div class="best-for light-bg">
+        <p class="best-for-label">Best For</p>
+        <ul>
+          <li>Athletes who feel "almost dialed"</li>
+          <li>Experienced racers who want expert review</li>
+          <li>Returning Tune Up Nutrition clients</li>
+        </ul>
+      </div>
+
+      <div class="service-cta">
+        <a href="#" class="btn btn-outline">Book Session</a>
+      </div>
+    </div>
+    <div class="service-image" style="background: linear-gradient(160deg, #465362 0%, #36384C 100%); position: sticky; top: 7rem;">
+      <span class="placeholder-label">Micro Adjust image</span>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta reveal">
+  <p class="section-label" style="text-align:center;">Not Sure Which Tune Up You Need?</p>
+  <h2>Schedule a <span>Fit Call</span></h2>
+  <p>We'll determine the best option for your training, goals, and timeline — no pressure, just clarity.</p>
+  <a href="#" class="btn btn-accent">Schedule a 30-Minute Fit Call</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:var(--accent); letter-spacing:0.1em;">Tune Up Nutrition</p>
+  <p>© 2025 Tune Up Nutrition Coaching. All rights reserved.</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => observer.observe(r));
+
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 60 ? '0.9rem 5vw' : '1.4rem 5vw';
+  });
+</script>
+</body>
+</html>

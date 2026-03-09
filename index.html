@@ -1,1746 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tune-up Nutrition</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tune Up Nutrition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>.better-inline-booking-widget{position:relative;overflow:hidden}.better-inline-booking-widget iframe{position:absolute;top:0;left:0;width:100%;height:100%}</style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-            /* New color palette */
-            --cream: #eae5d7;
-            --purple: #37384c;
-            --gold: #ce862a;
-            --light-purple: #5a5c78;
-            --dark-purple: #2a2b3d;
-            --light-gold: #e6a855;
-            --dark-gold: #b8721e;
-        }
-
-
-
-        body {
-            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-        }
-
-        /* Navigation Styles */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 25px 0;
-            background-color: transparent;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .navbar.scrolled {
-            padding: 15px 0;
-            background-color: var(--cream);
-            box-shadow: 0 2px 20px rgba(55, 56, 76, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
-            font-weight: 800;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .navbar.scrolled .logo {
-            font-size: 24px;
-            color: var(--purple);
-            text-shadow: none;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 40px;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link {
-            font-family: 'Montserrat', sans-serif;
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            position: relative;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .navbar.scrolled .nav-link {
-            color: var(--purple);
-            text-shadow: none;
-        }
-
-        .navbar.scrolled .nav-link:hover {
-            color: var(--gold);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: white;
-            transition: width 0.3s ease;
-        }
-
-        .navbar.scrolled .nav-link::after {
-            background-color: var(--gold);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 5px;
-        }
-
-        .hamburger {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        .navbar.scrolled .hamburger {
-            background-color: var(--purple);
-        }
-
-        .menu-toggle.active .hamburger:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-
-        .menu-toggle.active .hamburger:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active .hamburger:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(42, 43, 61, 0.7), rgba(55, 56, 76, 0.6)), url("images/1-small.jpg");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* Disable fixed background on mobile devices */
-@media (max-width: 768px) {
-    .hero {
-        background-attachment: scroll;
-        min-height: 100vh;
-        height: auto;
+    :root {
+      --black: #36384C;
+      --mid:   #465362;
+      --stone: #BFB8A9;
+      --linen: #E8E0D5;
+      --accent:#CE8523;
+      --white: #F7F3EE;
+      --gray:  #BFB8A9;
     }
-}
 
-/* Additional mobile fix for very small screens */
-@media (max-width: 480px) {
-    .hero {
-        background-attachment: scroll;
-        background-position: center center;
-        min-height: 100vh;
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 5vw;
+      background: rgba(54,56,76,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-}
-
-        .hero-content {
-            text-align: center;
-            color: white;
-            max-width: 1000px;
-            padding: 0 20px;
-        }
-
-        .hero-tagline {
-            font-family: 'Source Sans 3', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 400;
-            margin-bottom: 20px;
-            color: var(--light-gold);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            animation: fadeInUp 0.8s ease-out;
-            letter-spacing: 0.5px;
-        }
-
-        .hero h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 5.5rem;
-            font-weight: 900;
-            margin-bottom: 50px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-            animation: fadeInUp 1s ease-out 0.1s both;
-            line-height: 1;
-            letter-spacing: -2px;
-        }
-
-        .hero-cta {
-            margin-top: 60px;
-            animation: fadeInUp 1.4s ease-out 0.7s both;
-        }
-
-        .cta-button {
-            font-family: 'Montserrat', sans-serif;
-            display: inline-block;
-            padding: 22px 45px;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
-            color: var(--purple);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 12px 35px rgba(206, 134, 42, 0.4);
-            text-shadow: none;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            letter-spacing: 0.5px;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 18px 45px rgba(206, 134, 42, 0.6);
-            border-color: rgba(255, 255, 255, 0.5);
-            background: linear-gradient(135deg, var(--dark-gold) 0%, var(--gold) 100%);
-        }
-
-        /* Content Section */
-        .content {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Content Section Headers */
-        .content h2,
-        #about .hero-intro h2,
-        #services .intro-text h2,
-        #blog .intro-text h2,
-        #contact h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--purple);
-            font-weight: 700;
-        }
-
-        /* Content Paragraphs */
-        .content p,
-        #about .story-text p,
-        #about .who-intro,
-        #services .intro-text p,
-        #blog .intro-text p,
-        #contact p {
-            font-family: 'Source Sans 3', sans-serif;
-            font-size: 1.1rem;
-            color: var(--light-purple);
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-
-        /* About Section */
-        #about {
-            background: linear-gradient(135deg, var(--cream) 0%, #f4f0e5 100%);
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #about .content-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
-        }
-
-        #about .hero-intro {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        #about .hero-intro h2 {
-            font-size: 2.5rem;
-            color: var(--purple);
-        }
-
-        #about .hero-intro .tagline {
-            font-family: 'Source Sans 3', sans-serif;
-            font-size: 1.3rem;
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        #about .section-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            color: var(--purple);
-            margin-bottom: 25px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        #about .values-list .value-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: var(--purple);
-            font-size: 1.1rem;
-        }
-
-        #about .values-list .value-desc {
-            font-family: 'Source Sans 3', sans-serif;
-            color: var(--light-purple);
-            font-size: 1rem;
-            margin-top: 5px;
-        }
-
-        #about .athlete-types li {
-            font-family: 'Source Sans 3', sans-serif;
-            background: rgba(206, 134, 42, 0.1);
-            padding: 12px 20px;
-            margin-bottom: 10px;
-            border-radius: 25px;
-            color: var(--purple);
-            font-weight: 600;
-            text-align: center;
-        }
-
-        #about .final-cta h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: white;
-            font-weight: 700;
-        }
-
-        #about .final-cta p {
-            font-family: 'Source Sans 3', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-
-        #about .personal-story {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            margin-bottom: 80px;
-        }
-
-        #about .story-image {
-            flex-shrink: 0;
-        }
-
-        #about .story-image img {
-            width: 350px;
-            height: 350px;
-            border-radius: 20px;
-            object-fit: cover;
-            box-shadow: 0 15px 40px rgba(55, 56, 76, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        #about .story-image img:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(55, 56, 76, 0.3);
-        }
-
-        #about .story-text {
-            flex: 1;
-        }
-
-        #about .story-text p {
-            font-size: 1.2rem;
-            color: var(--purple);
-            margin-bottom: 25px;
-        }
-
-        #about .story-text p:first-child {
-            font-size: 1.2rem;
-            color: var(--purple);
-            font-weight: 500;
-        }
-
-        /* Philosophy Section */
-        #about .philosophy {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 20px;
-            padding: 50px;
-            margin-bottom: 60px;
-            border-left: 5px solid var(--gold);
-            box-shadow: 0 8px 25px rgba(55, 56, 76, 0.1);
-        }
-
-        #about .philosophy p {
-            font-size: 1.2rem;
-            color: var(--purple);
-            font-weight: 600;
-            text-align: center;
-            line-height: 1.7;
-            font-style: italic;
-        }
-
-        /* Values and Who I Help Grid */
-        #about .two-column-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 60px;
-        }
-
-        #about .values-section,
-        #about .who-section {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 8px 25px rgba(55, 56, 76, 0.1);
-        }
-
-        #about .section-title {
-            font-size: 1.8rem;
-            color: var(--purple);
-            margin-bottom: 25px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        #about .values-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        #about .values-list li {
-            margin-bottom: 20px;
-            position: relative;
-            padding-left: 30px;
-        }
-
-        #about .values-list li::before {
-            content: '●';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--gold);
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        #about .values-list .value-title {
-            font-weight: 700;
-            color: var(--purple);
-            font-size: 1.1rem;
-        }
-
-        #about .values-list .value-desc {
-            color: var(--light-purple);
-            font-size: 1rem;
-            margin-top: 5px;
-        }
-
-        #about .who-intro {
-            font-size: 1.1rem;
-            color: var(--light-purple);
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        #about .athlete-types {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 25px;
-        }
-
-        #about .athlete-types li {
-            background: rgba(206, 134, 42, 0.1);
-            padding: 12px 20px;
-            margin-bottom: 10px;
-            border-radius: 25px;
-            color: var(--purple);
-            font-weight: 600;
-            text-align: center;
-        }
-
-        #about .struggles-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        #about .struggles-list li {
-            position: relative;
-            padding: 8px 0 8px 25px;
-            color: var(--light-purple);
-            font-size: 1rem;
-        }
-
-        #about .struggles-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            color: var(--gold);
-            font-weight: bold;
-        }
-
-        /* Call to Action */
-        #about .final-cta {
-            background: linear-gradient(135deg, var(--purple) 0%, var(--light-purple) 100%);
-            border-radius: 20px;
-            padding: 50px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 15px 40px rgba(55, 56, 76, 0.3);
-        }
-
-        #about .final-cta h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        #about .final-cta p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-
-        #about .final-cta .cta-button {
-            display: inline-block;
-            background: var(--gold);
-            color: var(--purple);
-            padding: 18px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        #about .final-cta .cta-button:hover {
-            background: var(--light-gold);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Services Section */
-        #services {
-            background: #ffffff;
-            width: 100%;
-            max-width: none;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 1px 0 rgba(55, 56, 76, 0.05);
-        }
-
-        #services .content-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
-        }
-
-        #services .intro-text {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        #services .intro-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--purple);
-        }
-
-        #services .intro-text p {
-            font-size: 1.2rem;
-            color: var(--light-purple);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        #services .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 60px;
-            align-items: start;
-            margin-bottom: 80px;
-        }
-
-        #services .service-item {
-            text-align: center;
-        }
-
-        #services .service-circle {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto 25px;
-            box-shadow: 0 8px 25px rgba(55, 56, 76, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            font-size: 100px;
-        }
-
-        #services .service-circle:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(55, 56, 76, 0.25);
-        }
-
-        #services .service-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--purple);
-            margin-bottom: 15px;
-        }
-
-        #services .service-description {
-            font-family: 'Source Sans 3', sans-serif;
-            font-size: 1rem;
-            color: var(--light-purple);
-            line-height: 1.6;
-        }
-
-        #services .cta-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--purple);
-            margin-bottom: 15px;
-        }
-
-        #services .cta-text {
-            font-family: 'Source Sans 3', sans-serif;
-            font-size: 1.1rem;
-            color: var(--light-purple);
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        #services .cta-button {
-            font-family: 'Montserrat', sans-serif;
-            display: inline-flex;
-            align-items: center;
-            background: var(--gold);
-            color: var(--purple);
-            text-decoration: none;
-            padding: 18px 35px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(206, 134, 42, 0.3);
-        }
-
-        /* Call to Action Section */
-        #services .cta-section {
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, var(--cream) 0%, #f4f0e5 100%);
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(55, 56, 76, 0.1);
-        }
-
-        #services .cta-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--purple);
-            margin-bottom: 15px;
-        }
-
-        #services .cta-text {
-            font-size: 1.1rem;
-            color: var(--light-purple);
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        #services .cta-button {
-            display: inline-flex;
-            align-items: center;
-            background: var(--gold);
-            color: var(--purple);
-            text-decoration: none;
-            padding: 18px 35px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(206, 134, 42, 0.3);
-        }
-
-        #services .cta-button:hover {
-            background: var(--light-gold);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(206, 134, 42, 0.4);
-        }
-
-        #services .cta-button::after {
-            content: '→';
-            margin-left: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        #services .cta-button:hover::after {
-            transform: translateX(4px);
-        }
-
-        /* Blog Section */
-        #blog {
-            background: linear-gradient(135deg, var(--purple) 0%, var(--dark-purple) 100%);
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #blog .content-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
-        }
-
-        #blog .intro-text {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        #blog .intro-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        #blog .intro-text p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        #blog .placeholder-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        #blog .placeholder-icon {
-            font-size: 4rem;
-            margin-bottom: 30px;
-            opacity: 0.8;
-        }
-
-        #blog .placeholder-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        #blog .placeholder-text {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-            margin-bottom: 35px;
-        }
-
-        #blog .coming-soon {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--gold), var(--light-gold));
-            color: var(--purple);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Contact Section */
-        #contact {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 50%, var(--dark-gold) 100%);
-            width: 100%;
-            max-width: none;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #contact::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="60" r="10" fill="rgba(255,255,255,0.05)"/><circle cx="85" cy="25" r="8" fill="rgba(255,255,255,0.08)"/></svg>');
-            pointer-events: none;
-        }
-
-        #contact .content-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        #contact h2 {
-            color: var(--purple);
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
-        }
-
-        #contact p {
-            color: var(--purple);
-            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Footer Styles */
-        .footer {
-            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--purple) 100%);
-            color: white;
-            padding: 0px 0 30px;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--light-gold);
-        }
-
-        .footer-about p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--light-gold);
-        }
-
-        .contact-info {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .contact-info p {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--gold);
-            transform: translateY(-2px);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: 30px;
-            text-align: center;
-        }
-
-        .footer-bottom p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        .footer-bottom a {
-            color: var(--light-gold);
-            text-decoration: none;
-        }
-
-        .footer-bottom a:hover {
-            text-decoration: underline;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Animation styles */
-        .content-inner {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100vh;
-                background-color: rgba(234, 229, 215, 0.98);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: left 0.3s ease;
-                gap: 30px;
-            }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            .nav-menu .nav-link {
-                color: var(--purple);
-                text-shadow: none;
-            }
-
-            .nav-link {
-                font-size: 24px;
-            }
-
-            .logo {
-                font-size: 24px;
-            }
-
-            .navbar.scrolled .logo {
-                font-size: 20px;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-tagline {
-                font-size: 1.2rem;
-            }
-
-            .nav-container {
-                padding: 0 15px;
-            }
-
-            #about .content-inner {
-                padding: 80px 15px;
-            }
-
-            #about .hero-intro {
-                margin-bottom: 40px;
-            }
-
-            #about .hero-intro h2 {
-                font-size: 2rem;
-            }
-
-            #about .hero-intro .tagline {
-                font-size: 1.1rem;
-            }
-
-            #about .personal-story {
-                flex-direction: column;
-                gap: 40px;
-                text-align: center;
-                margin-bottom: 60px;
-            }
-
-            #about .story-image img {
-                width: 250px;
-                height: 250px;
-            }
-
-            #about .story-text p:first-child {
-                font-size: 1.1rem;
-            }
-
-            #about .story-text p {
-                font-size: 1rem;
-            }
-
-            #about .philosophy {
-                padding: 35px;
-            }
-
-            #about .philosophy p {
-                font-size: 1.1rem;
-            }
-
-            #about .two-column-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            #about .values-section,
-            #about .who-section {
-                padding: 30px;
-            }
-
-            #about .section-title {
-                font-size: 1.6rem;
-            }
-
-            #about .final-cta {
-                padding: 35px;
-            }
-
-            #about .final-cta h3 {
-                font-size: 1.7rem;
-            }
-
-            #about .final-cta p {
-                font-size: 1.1rem;
-            }
-
-            #services .content-inner,
-            #blog .content-inner,
-            #contact .content-inner {
-                padding: 80px 15px;
-            }
-
-            #services .intro-text {
-                margin-bottom: 60px;
-            }
-
-            #services .intro-text h2 {
-                font-size: 2rem;
-            }
-
-            #services .intro-text p {
-                font-size: 1.1rem;
-            }
-
-            #services .services-grid {
-                grid-template-columns: 1fr;
-                gap: 50px;
-                margin-bottom: 60px;
-            }
-
-            #services .service-circle {
-                width: 180px;
-                height: 180px;
-            }
-
-            #services .service-title {
-                font-size: 1.3rem;
-            }
-
-            #services .service-description {
-                font-size: 0.95rem;
-            }
-
-            #services .cta-section {
-                padding: 30px;
-            }
-
-            #services .cta-title {
-                font-size: 1.6rem;
-            }
-
-            #services .cta-text {
-                font-size: 1rem;
-            }
-
-            #services .cta-button {
-                padding: 15px 30px;
-                font-size: 1rem;
-            }
-
-            #blog .intro-text {
-                margin-bottom: 60px;
-            }
-
-            #blog .intro-text h2 {
-                font-size: 2rem;
-            }
-
-            #blog .intro-text p {
-                font-size: 1.1rem;
-            }
-
-            #blog .placeholder-content {
-                padding: 50px 30px;
-            }
-
-            #blog .placeholder-icon {
-                font-size: 3.5rem;
-                margin-bottom: 25px;
-            }
-
-            #blog .placeholder-title {
-                font-size: 1.7rem;
-            }
-
-            #blog .placeholder-text {
-                font-size: 1.1rem;
-            }
-
-            .footer {
-                padding: 40px 0 20px;
-            }
-
-            .footer-container {
-                padding: 0 15px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                margin-bottom: 30px;
-            }
-
-            .footer-section h3 {
-                font-size: 1.2rem;
-            }
-
-            .footer-about p {
-                font-size: 0.95rem;
-            }
-
-            .footer-links a {
-                font-size: 0.95rem;
-            }
-
-            .contact-info {
-                font-size: 0.95rem;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero-tagline {
-                font-size: 1rem;
-            }
-
-            .cta-button {
-                padding: 12px 25px;
-                font-size: 1rem;
-            }
-
-            .navbar {
-                padding: 20px 0;
-            }
-
-            .navbar.scrolled {
-                padding: 12px 0;
-            }
-
-            #about .content-inner {
-                padding: 60px 15px;
-            }
-
-            #about .hero-intro {
-                margin-bottom: 30px;
-            }
-
-            #about .hero-intro h2 {
-                font-size: 1.8rem;
-            }
-
-            #about .hero-intro .tagline {
-                font-size: 1rem;
-            }
-
-            #about .personal-story {
-                gap: 30px;
-            }
-
-            #about .story-image img {
-                width: 200px;
-                height: 200px;
-            }
-
-            #about .story-text p:first-child {
-                font-size: 1rem;
-            }
-
-            #services .content-inner,
-            #blog .content-inner,
-            #contact .content-inner {
-                padding: 60px 15px;
-            }
-
-            #services .intro-text {
-                margin-bottom: 40px;
-            }
-
-            #services .intro-text h2 {
-                font-size: 1.8rem;
-            }
-
-            #services .intro-text p {
-                font-size: 1rem;
-            }
-
-            #services .services-grid {
-                gap: 40px;
-                margin-bottom: 40px;
-            }
-
-            #services .service-circle {
-                width: 160px;
-                height: 160px;
-            }
-
-            #services .service-title {
-                font-size: 1.2rem;
-            }
-
-            #services .cta-section {
-                padding: 25px;
-            }
-
-            #services .cta-title {
-                font-size: 1.4rem;
-            }
-
-            #services .cta-text {
-                font-size: 0.95rem;
-            }
-
-            #services .cta-button {
-                padding: 12px 25px;
-                font-size: 0.95rem;
-            }
-
-            #blog .intro-text {
-                margin-bottom: 40px;
-            }
-
-            #blog .intro-text h2 {
-                font-size: 1.8rem;
-            }
-
-            #blog .intro-text p {
-                font-size: 1rem;
-            }
-
-            #blog .placeholder-content {
-                padding: 40px 25px;
-            }
-
-            #blog .placeholder-icon {
-                font-size: 3rem;
-                margin-bottom: 20px;
-            }
-
-            #blog .placeholder-title {
-                font-size: 1.5rem;
-            }
-
-            #blog .placeholder-text {
-                font-size: 1rem;
-            }
-
-            .footer {
-                padding: 30px 0 15px;
-            }
-
-            .footer-content {
-                gap: 25px;
-                margin-bottom: 25px;
-            }
-
-            .footer-section h3 {
-                font-size: 1.1rem;
-                margin-bottom: 15px;
-            }
-
-            .social-links a {
-                width: 35px;
-                height: 35px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Basic unordered list styling with new colors */
-        .styled-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .styled-list li {
-            position: relative;
-            padding: 12px 0 12px 35px;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--light-purple);
-            border-bottom: 1px solid rgba(206, 134, 42, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .styled-list li:last-child {
-            border-bottom: none;
-        }
-
-        .styled-list li::before {
-            content: '●';
-            position: absolute;
-            left: 0;
-            top: 12px;
-            color: var(--gold);
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .styled-list li:hover {
-            color: var(--purple);
-            padding-left: 40px;
-            background: rgba(206, 134, 42, 0.05);
-            border-radius: 8px;
-        }
-
-        .styled-list.checkmark li::before {
-            content: '✓';
-            color: var(--gold);
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .styled-list.arrows li::before {
-            content: '→';
-            color: var(--purple);
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-
-        .styled-list.compact li {
-            padding: 8px 0 8px 30px;
-            font-size: 1rem;
-        }
-
-        .styled-list.compact li::before {
-            font-size: 1rem;
-            top: 8px;
-        }
-
-        .styled-list.cards li {
-            background: rgba(234, 229, 215, 0.8);
-            border: 1px solid rgba(206, 134, 42, 0.2);
-            border-radius: 12px;
-            margin-bottom: 15px;
-            padding: 20px 20px 20px 50px;
-            box-shadow: 0 2px 10px rgba(55, 56, 76, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .styled-list.cards li:hover {
-            background: rgba(234, 229, 215, 1);
-            box-shadow: 0 4px 20px rgba(55, 56, 76, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .styled-list.cards li::before {
-            left: 20px;
-            top: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .styled-list li {
-                font-size: 1rem;
-                padding: 10px 0 10px 30px;
-            }
-            
-            .styled-list.cards li {
-                padding: 15px 15px 15px 40px;
-            }
-            
-            .styled-list.cards li::before {
-                left: 15px;
-                top: 15px;
-            }
-        }
-    </style>
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.12em; color: var(--accent); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--white); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero { min-height: 100vh; padding: 14vh 5vw 8vh; display: flex; align-items: flex-end; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('images/1-small.jpg'); background-size: cover; background-position: center; z-index: 0; }
+    .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(54,56,76,0.82) 0%, rgba(54,56,76,0.65) 55%, rgba(54,56,76,0.25) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 620px; }
+    .hero-eyebrow { font-size: 1rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
+    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 11vw, 10rem); line-height: 0.9; letter-spacing: 0.04em; color: var(--white); opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
+    .hero-title span { color: var(--accent); }
+    .hero-sub { margin-top: 1.8rem; font-size: 1rem; font-weight: 300; color: var(--gray); line-height: 1.7; max-width: 38ch; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
+    .hero-ctas { display: flex; gap: 1rem; margin-top: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.65s forwards; }
+
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--white); color: var(--black); border: none; }
+    .btn-primary:hover { box-shadow: 0 8px 24px rgba(206,133,35,0.3); }
+    .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.25); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-dark { background: var(--black); color: var(--white); border: none; margin-top: 1rem; }
+    .btn-dark:hover { box-shadow: 0 8px 24px rgba(54,56,76,0.3); }
+
+    .accent-line { width: 60px; height: 2px; background: var(--stone); margin: 1.4rem 0; }
+
+    section { position: relative; }
+    .section-label { font-size: 1rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+
+    .train-hard { background: var(--white); color: var(--black); padding: 8rem 5vw; }
+    .train-hard-left { width: 100%; }
+    .train-hard h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 6vw, 6rem); letter-spacing: 0.04em; line-height: 0.95; margin-bottom: 2.5rem; }
+    .train-hard-body { display: flex; flex-direction: column; gap: 0; }
+    .train-hard-body p { font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 300; color: #465362; line-height: 1.7; margin-top: 1.5rem; }
+
+    .who-section { background: var(--black); color: var(--white); padding: 8rem 5vw; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .who-image-wrap { position: relative; height: 520px; border-radius: 4px; overflow: hidden; }
+    .who-content .section-label { color: var(--accent); }
+    .who-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 6vw, 6rem); line-height: 0.95; letter-spacing: 0.03em; color: var(--white); }
+    .who-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0; }
+    .who-list li { font-size: 1.05rem; font-weight: 300; color: var(--white); padding: 0.6rem 0; display: flex; align-items: center; gap: 0.75rem; }
+    .who-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    .helps-label { color: var(--accent); }
+    .helps-section { background: var(--white); color: var(--black); padding: 8rem 5vw; }
+    .helps-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+    .helps-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 6vw, 6rem); letter-spacing: 0.04em; line-height: 0.95; }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .card { background: var(--black); color: var(--white); border-radius: 6px; padding: 3rem 2rem 2.5rem; display: flex; flex-direction: column; gap: 1rem; position: relative; overflow: hidden; transition: transform 0.3s; cursor: pointer; }
+    .card:hover { transform: translateY(-6px); }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .card:hover::before { transform: scaleX(1); }
+    .card-icon { width: 48px; height: 48px; background: rgba(206,133,35,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+    .card-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.06em; }
+    .card p { font-size: 0.88rem; font-weight: 300; color: var(--gray); line-height: 1.75; }
+    .card-arrow { margin-top: auto; font-size: 1rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 0.4rem; }
+
+    .about-section { background: var(--linen); color: var(--black); padding: 8rem 5vw; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .about-content .section-label { color: var(--accent); }
+    .about-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 6vw, 6rem); letter-spacing: 0.04em; line-height: 0.95; color: var(--black); margin-bottom: 1.5rem; }
+    .about-content .about-title { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); margin-bottom: 1.5rem; }
+    .about-content p { font-size: 1rem; font-weight: 300; color: var(--mid); line-height: 1.8; margin-bottom: 1rem; }
+    .about-image-wrap { position: relative; height: 580px; border-radius: 4px; overflow: hidden; }
+
+    .footer-cta { background: var(--black); padding: 8rem 5vw; text-align: center; }
+    .footer-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 7vw, 7rem); line-height: 0.9; letter-spacing: 0.04em; }
+    .footer-cta h2 span { color: var(--accent); }
+    .footer-cta p { margin: 1.5rem auto; max-width: 44ch; color: var(--gray); font-weight: 300; font-size: 1rem; line-height: 1.7; }
+    .footer-cta .hero-ctas { justify-content: center; }
+
+    footer { background: var(--black); padding: 2rem 5vw; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(206,133,35,0.35); }
+    footer p { font-size: 0.78rem; color: var(--gray); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (min-width: 1400px) {
+      html { font-size: 18px; }
+      .hero-title { font-size: clamp(8rem, 10vw, 14rem); }
+      .hero-sub { font-size: 1.15rem; max-width: 44ch; }
+      .hero-content { max-width: 780px; }
+      .train-hard { padding: 10rem 7vw; }
+      .train-hard h2 { font-size: clamp(5rem, 6vw, 8rem); }
+      .train-hard-body p { font-size: clamp(1.2rem, 1.4vw, 1.6rem); }
+      .who-section { padding: 10rem 7vw; gap: 8rem; }
+      .who-content h2 { font-size: clamp(5rem, 6vw, 8rem); }
+      .who-list li { font-size: 1.15rem; }
+      .helps-section { padding: 10rem 7vw; }
+      .helps-section h2 { font-size: clamp(5rem, 6vw, 8rem); }
+      .card { padding: 3.5rem 2.5rem; }
+      .card h3 { font-size: 2.4rem; }
+      .card p { font-size: 1rem; }
+      .about-section { padding: 10rem 7vw; gap: 8rem; }
+      .about-content h2 { font-size: clamp(5rem, 6vw, 8rem); }
+      .footer-cta { padding: 10rem 7vw; }
+      .footer-cta h2 { font-size: clamp(5rem, 8vw, 10rem); }
+      .footer-cta p { font-size: 1.15rem; max-width: 50ch; }
+      .btn { padding: 1rem 2.4rem; font-size: 0.9rem; }
+    }
+
+    @media (max-width: 900px) {
+      .who-section { grid-template-columns: 1fr; gap: 3rem; }
+      .who-image-wrap { height: 55vw; }
+      .about-section { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image-wrap { height: 55vw; }
+      .cards-grid { grid-template-columns: 1fr 1fr; }
+      .helps-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .train-hard-body { gap: 1rem; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 5vw; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.72rem; }
+      .hero { padding: 12vh 5vw 6vh; align-items: flex-end; min-height: 100svh; }
+      .hero-content { max-width: 100%; }
+      .hero-title { font-size: clamp(3.5rem, 16vw, 6rem); }
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { text-align: center; justify-content: center; }
+      .train-hard { padding: 5rem 5vw; }
+      .train-hard h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+      .train-hard-body p { font-size: 1rem; }
+      .who-section { padding: 5rem 5vw; gap: 2.5rem; }
+      .who-image-wrap { height: 70vw; }
+      .who-content h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+      .who-list li { font-size: 0.95rem; }
+      .about-section { padding: 5rem 5vw; gap: 2.5rem; }
+      .about-image-wrap { height: 70vw; }
+      .about-content h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+      .cards-grid { grid-template-columns: 1fr; }
+      .helps-section { padding: 5rem 5vw; }
+      .helps-section h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+      .footer-cta { padding: 5rem 5vw; }
+      .footer-cta h2 { font-size: clamp(2.5rem, 10vw, 5rem); }
+      .footer-cta .hero-ctas { flex-direction: column; }
+      .footer-cta .hero-ctas .btn { text-align: center; justify-content: center; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#hero" class="logo">Tune Up Nutrition</a>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#services" class="nav-link">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
-            </ul>
-            
-            <button class="menu-toggle" id="mobile-menu">
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
-            </button>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <p class="hero-tagline">Personalized nutrition coaching for endurance cyclists and athletes</p>
-            <h1>Tune Up Your Nutrition</h1>
-            
-            <div class="hero-cta">
-                <a href="#contact" class="cta-button">Get Your Nutrition Tune-Up</a>
-            </div>
-        </div>
-    </section>
+<nav>
+  <div class="nav-logo">Tune Up Nutrition</div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#helps">Services</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="content-inner">
-            <!-- Hero Introduction -->
-            <div class="hero-intro">
-                <h2>Meet Taylor</h2>
-                <p class="tagline">Registered Dietitian & Endurance Athlete</p>
-            </div>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Performance Isn't Just Trained. It's Tuned.</p>
+    <h1 class="hero-title">Tune Up<br><span>Nutrition</span></h1>
+    <div class="accent-line"></div>
+    <p class="hero-sub">Evidence-based fueling strategies built for endurance athletes who want their nutrition as structured as their training.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary">Learn More</a>
+      <a href="#" class="btn btn-outline">Book Discovery Call</a>
+    </div>
+  </div>
+</section>
 
-            <!-- Personal Story -->
-            <div class="personal-story">
-                <div class="story-image">
-                    <img src="images/taylor.jpeg" alt="Taylor in cycling gear, enjoying a pastry stop">
-                </div>
-                <div class="story-text">
-                    <p>Hi, I'm Taylor Brower, a Registered Dietitian and endurance athlete. I founded <strong>Tune Up Nutrition</strong> because I saw too many cyclists and endurance athletes struggling with the same problems: bonking on long rides, under-fueling during training blocks, and feeling uncertain about what to eat before, during, and after their workouts.</p>
-                    
-                    <p>I've been there myself and I know firsthand how frustrating it is to pour hours into training, only to have your nutrition hold you back.</p>
+<section class="train-hard reveal">
+  <div class="train-hard-left">
+    <p class="section-label">You Train Hard...</p>
+    <h2>Are You Fueling to Match It?</h2>
+  </div>
+  <div class="train-hard-body">
+    <p>Most endurance athletes train with structure, discipline, and intention, but their fueling rarely matches the demands of their training. They're stacking long rides, interval sessions, strength work, and race simulations on top of busy lives, yet relying on outdated carb fears, inconsistent hydration habits, or guesswork around recovery.</p>
+    <p>The result isn't a lack of fitness, it's unexplained fatigue, mid-ride energy crashes, GI distress on race day, stalled progress, or body composition shifts that don't align with performance goals. Many athletes assume they just need to "push harder," when in reality their physiology is under-supported.</p>
+    <p>Without a clear fueling framework aligned to training load, even the most dedicated athletes end up under-recovered, under-fueled, and leaving performance on the table.</p>
+  </div>
+</section>
 
-                    <p>Cyclists know the value of a good bike tune-up. You can have the best frame and the strongest legs, but if your gears are grinding or your brakes aren't aligned, your ride suffers. Nutrition is the same way: it's often the missing piece holding athletes back. <strong>Tune Up Nutrition</strong> is here to make sure your fueling is as dialed as your training plan and your bike setup.</p>
-                </div>
-            </div>
+<section class="who-section" id="who">
+  <div class="who-image-wrap reveal">
+    <img src="images/race-fuel.jpeg" alt="Endurance athletes racing" style="width:100%; height:100%; object-fit:cover; object-position:center;" />
+  </div>
+  <div class="who-content reveal">
+    <p class="section-label">Who Is This For?</p>
+    <h2>Endurance Athletes at Every Level</h2>
+    <ul class="who-list">
+      <li>Gravel, MTB, road & ultra cyclists</li>
+      <li>Masters athletes</li>
+      <li>Women navigating hormonal shifts</li>
+      <li>Athletes increasing training load</li>
+      <li>Athletes rebuilding from burnout or underfueling</li>
+    </ul>
+  </div>
+</section>
 
-            <!-- Values and Who I Help -->
-            <div class="two-column-grid">
-                <!-- Values Section -->
-                <div class="values-section">
-                    <h3 class="section-title">Values</h3>
-                    <ul class="values-list">
-                        <li>
-                            <div class="value-title">Performance without extremes</div>
-                            <div class="value-desc">No fad diets, no under-fueling, no gimmicks.</div>
-                        </li>
-                        <li>
-                            <div class="value-title">Empowerment through education</div>
-                            <div class="value-desc">Athletes leave with knowledge and confidence, not dependence.</div>
-                        </li>
-                        <li>
-                            <div class="value-title">Sustainability</div>
-                            <div class="value-desc">Plans fit into real life, not just race day.</div>
-                        </li>
-                        <li>
-                            <div class="value-title">Inclusivity</div>
-                            <div class="value-desc">Open to athletes of all levels, backgrounds, and body types.</div>
-                        </li>
-                    </ul>
-                </div>
+<section class="helps-section" id="helps">
+  <div class="helps-header reveal">
+    <div>
+      <p class="section-label helps-label">What We Offer</p>
+      <h2>How Tune Up Nutrition<br>Helps</h2>
+    </div>
+  </div>
+  <div class="cards-grid">
+    <div class="card reveal">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>1:1 Performance Nutrition</h3>
+      <p>Structured, data-informed fueling support.</p>
+      <span class="card-arrow">Learn more →</span>
+    </div>
+    <div class="card reveal" style="transition-delay:0.1s">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Online Course</h3>
+      <p>Coming soon!</p>
+      <span class="card-arrow">Learn more →</span>
+    </div>
+    <div class="card reveal" style="transition-delay:0.2s">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <h3>Race & Team Support</h3>
+      <p>Fueling strategy for events, clubs, and teams.</p>
+      <span class="card-arrow">Learn more →</span>
+    </div>
+  </div>
+</section>
 
-                <!-- Who I Help Section -->
-                <div class="who-section">
-                    <h3 class="section-title">Who I Help</h3>
-                    <p class="who-intro">I specialize in working with:</p>
-                    
-                    <ul class="athlete-types">
-                        <li>Cyclists training for centuries, fondos, gravel races, and stage races</li>
-                        <li>Athletes who feel lost about what/when/how much to eat</li>
-                        <li>Runners and multisport athletes who want to optimize fueling</li>
-                        <li>Athletes who want to stop bonking, cramping, or fading late in events</li>
-                    </ul>
-                </div>
-            </div>
+<section class="about-section" id="about">
+  <div class="about-content reveal">
+    <p class="section-label">About</p>
+    <h2>Taylor Brower</h2>
+    <p class="about-title">Registered Dietitian & Endurance Athlete</p>
+    <p>Taylor is a Registered Dietitian with a passion for helping endurance athletes unlock their full potential through evidence-based nutrition. She understands the demands of long training blocks because she lives them — as both a practitioner and an athlete herself.</p>
+    <p>Her approach is practical, personalised, and grounded in physiology. No fad protocols, no one-size-fits-all plans — just smart fueling strategies that fit your training, your body, and your goals.</p>
+    <a href="#" class="btn btn-dark">Work With Taylor</a>
+  </div>
+  <div class="about-image-wrap reveal">
+    <img src="images/taylor.jpeg" alt="Taylor Brower, RD" style="width:100%; height:100%; object-fit:cover; object-position:center top;" />
+  </div>
+</section>
 
-            <!-- Final Call to Action -->
-            <div class="final-cta">
-                <h3>Ready to Tune Up Your Nutrition?</h3>
-                <p>Your training is only as strong as your fueling. Let's make sure your nutrition is tuned up and ready for whatever ride, race, or adventure you're chasing.</p>
-                <a href="#contact" class="cta-button">Start Your Nutrition Tune-Up</a>
-            </div>
-        </div>
-    </section>
+<section class="footer-cta reveal">
+  <h2>Ready for a <span>Tune Up?</span></h2>
+  <p style="color: var(--white); opacity: 0.75;">Book a free discovery call and we'll map out exactly what your training is missing.</p>
+  
+<!-- Practice Better Booking Widget: start -->
 
-    <!-- Services Section -->
-    <section class="content" id="services">
-        <div class="content-inner">
-            <!-- Intro Section -->
-            <div class="intro-text">
-                <h2>My Services</h2>
-                <p>My evidence-based approach ensures you receive personalized care that fits your unique needs and lifestyle. Services I offer include:</p>
-            </div>
+  <div class="better-inline-booking-widget" data-url="https://tuneupnutrition.practicebetter.io" data-booking-page="" data-hash="698e48b99e6bf27f525e6711" data-theme="36384c" data-theme-accent="ce8523" style="width:100%;max-width:550px;height:800px;" data-scrollbar-visible="false"></div>
 
-            <!-- Services Grid -->
-            <div class="services-grid">
-                <div class="service-item">
-                    <div class="service-circle" style="background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);">
-                        🍎
-                    </div>
-                    <h3 class="service-title">1:1 Nutrition Coaching</h3>
-                    <p class="service-description">Custom fueling plans for training, race day, and recovery.</p>
-                </div>
+<!-- Practice Better Booking Widget: end -->
 
-                <div class="service-item">
-                    <div class="service-circle" style="background: linear-gradient(135deg, var(--purple) 0%, var(--light-purple) 100%);">
-                        🥇
-                    </div>
-                    <h3 class="service-title">Race Fueling Strategy</h3>
-                    <p class="service-description">Deep dive into a specific event: route planning, aid station strategy, fueling timing.</p>
-                </div>
+  <!-- <div class="hero-ctas">
+    <a href="#" class="btn btn-primary">Book Discovery Call</a>
+    <a href="#" class="btn btn-outline" style="color:#F7F3EE; border-color:rgba(255,255,255,0.25)">Learn More</a>
+  </div> -->
+</section>
 
-                <div class="service-item">
-                    <div class="service-circle" style="background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);">
-                        🗣️
-                    </div>
-                    <h3 class="service-title">Team / Group Talks</h3>
-                    <p class="service-description">Clinics or workshops for cycling clubs, teams, or training groups.</p>
-                </div>
-            </div>
+<footer>
+  <p style="font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:var(--accent); letter-spacing:0.1em;">Tune Up Nutrition</p>
+  <p>© 2025 Tune Up Nutrition Coaching. All rights reserved.</p>
+</footer>
 
-            <!-- Call to Action Section -->
-            <div class="cta-section">
-                <h3 class="cta-title">Ready for a Tune Up?</h3>
-                <a href="#contact" class="cta-button">Get in Touch!</a>
-            </div>
-        </div>
-    </section>
+<script type="text/javascript" src="https://cdn.practicebetter.io/assets/js/booking.widget.js"></script>
 
-    <!-- Blog Section -->
-    <section id="blog">
-        <div class="content-inner">
-            <!-- Intro Section -->
-            <div class="intro-text">
-                <h2>Nutrition Resources & Tips</h2>
-                <p>Expert insights on endurance fueling, race-day strategies, and performance nutrition coming soon.</p>
-            </div>
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
 
-            <!-- Placeholder Content -->
-            <div class="placeholder-content">
-                <div class="coming-soon">Coming Soon</div>
-                <div class="placeholder-icon">🚴‍♀️</div>
-                <h3 class="placeholder-title">Blog Posts in Development</h3>
-                <p class="placeholder-text">I'm working on valuable content covering race-day fueling strategies, training nutrition, recovery protocols, and practical tips for endurance athletes.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="content" id="contact">
-        <div class="content-inner">
-            <h2>Get in Touch</h2>
-            <p>Ready to start your nutrition journey? Drop me your info, and I'll get in touch.</p>
-            <div data-tf-live="01K3AD2ZGZHW91RPP6DYA5FVNS" class="typeform"></div><script src="//embed.typeform.com/next/embed.js"></script>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-bottom">
-            <p>&copy; 2025 Tune-up Nutrition. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
-
-        mobileMenu.addEventListener('click', function() {
-            mobileMenu.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on nav links
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offsetTop = target.offsetTop - 60;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Add scroll-based animations
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.content-inner');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-        }
-
-        // Initialize content animations
-        document.querySelectorAll('.content-inner').forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        });
-
-        window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll(); // Run once on load
-    </script>
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 60 ? '0.9rem 5vw' : '1.4rem 5vw';
+  });
+</script>
 </body>
 </html>
