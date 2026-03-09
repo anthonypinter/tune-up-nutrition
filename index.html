@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tune Up Nutrition</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
-  <style>.better-inline-booking-widget{position:relative;overflow:hidden}.better-inline-booking-widget iframe{position:absolute;top:0;left:0;width:100%;height:100%}</style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -78,13 +77,22 @@
     .helps-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
     .helps-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 6vw, 6rem); letter-spacing: 0.04em; line-height: 0.95; }
     .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .card { background: var(--black); color: var(--white); border-radius: 6px; padding: 3rem 2rem 2.5rem; display: flex; flex-direction: column; gap: 1rem; position: relative; overflow: hidden; transition: transform 0.3s; cursor: pointer; }
+
+    /* Card as link */
+    .card {
+      background: var(--black); color: var(--white); border-radius: 6px; padding: 3rem 2rem 2.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      position: relative; overflow: hidden;
+      transition: transform 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+    }
     .card:hover { transform: translateY(-6px); }
     .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
     .card:hover::before { transform: scaleX(1); }
     .card-icon { width: 48px; height: 48px; background: rgba(206,133,35,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
     .card-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.06em; }
+    .card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.06em; color: var(--white); }
     .card p { font-size: 0.88rem; font-weight: 300; color: var(--gray); line-height: 1.75; }
     .card-arrow { margin-top: auto; font-size: 1rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 0.4rem; }
 
@@ -176,11 +184,10 @@
 <body>
 
 <nav>
-  <div class="nav-logo">Tune Up Nutrition</div>
+  <a href="/" class="nav-logo" style="text-decoration: none;">Tune Up Nutrition</a>
   <ul class="nav-links">
     <li><a href="#">Home</a></li>
-    <li><a href="#helps">Services</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="/services.html">Services</a></li>
   </ul>
 </nav>
 
@@ -192,8 +199,8 @@
     <div class="accent-line"></div>
     <p class="hero-sub">Evidence-based fueling strategies built for endurance athletes who want their nutrition as structured as their training.</p>
     <div class="hero-ctas">
-      <a href="#" class="btn btn-primary">Learn More</a>
-      <a href="#" class="btn btn-outline">Book Discovery Call</a>
+      <a href="#helps" class="btn btn-primary">Learn More</a>
+      <a href="https://tuneupnutrition.practicebetter.io/#/698e48b99e6bf27f525e6711/bookings?s=69a21982674a64c3206a7bc1" class="btn btn-outline">Book Discovery Call</a>
     </div>
   </div>
 </section>
@@ -235,30 +242,29 @@
     </div>
   </div>
   <div class="cards-grid">
-    <div class="card reveal">
+    <a href="/services.html" class="card reveal">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       </div>
       <h3>1:1 Performance Nutrition</h3>
       <p>Structured, data-informed fueling support.</p>
       <span class="card-arrow">Learn more →</span>
-    </div>
-    <div class="card reveal" style="transition-delay:0.1s">
+    </a>
+    <div class="card reveal" style="transition-delay:0.1s; cursor:default;">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
       </div>
       <h3>Online Course</h3>
       <p>Coming soon!</p>
-      <span class="card-arrow">Learn more →</span>
     </div>
-    <div class="card reveal" style="transition-delay:0.2s">
+    <a href="https://f5pzj6dgs61.typeform.com/to/dePrVEsJ" class="card reveal" style="transition-delay:0.2s">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
       </div>
       <h3>Race & Team Support</h3>
       <p>Fueling strategy for events, clubs, and teams.</p>
-      <span class="card-arrow">Learn more →</span>
-    </div>
+      <span class="card-arrow">Inquire here →</span>
+    </a>
   </div>
 </section>
 
@@ -269,7 +275,6 @@
     <p class="about-title">Registered Dietitian & Endurance Athlete</p>
     <p>Taylor is a Registered Dietitian with a passion for helping endurance athletes unlock their full potential through evidence-based nutrition. She understands the demands of long training blocks because she lives them — as both a practitioner and an athlete herself.</p>
     <p>Her approach is practical, personalised, and grounded in physiology. No fad protocols, no one-size-fits-all plans — just smart fueling strategies that fit your training, your body, and your goals.</p>
-    <a href="#" class="btn btn-dark">Work With Taylor</a>
   </div>
   <div class="about-image-wrap reveal">
     <img src="images/taylor.jpeg" alt="Taylor Brower, RD" style="width:100%; height:100%; object-fit:cover; object-position:center top;" />
@@ -279,25 +284,15 @@
 <section class="footer-cta reveal">
   <h2>Ready for a <span>Tune Up?</span></h2>
   <p style="color: var(--white); opacity: 0.75;">Book a free discovery call and we'll map out exactly what your training is missing.</p>
-  
-<!-- Practice Better Booking Widget: start -->
-
-<div class="better-inline-booking-widget" data-url="https://tuneupnutrition.practicebetter.io" data-service="69a21982674a64c3206a7bc1" data-hash="698e48b99e6bf27f525e6711" data-theme="36384c" data-theme-accent="ce8523" style="width:100%;max-width:550px;height:800px;" data-scrollbar-visible="false"></div>
-
-<!-- Practice Better Booking Widget: end -->
-
-  <!-- <div class="hero-ctas">
-    <a href="#" class="btn btn-primary">Book Discovery Call</a>
-    <a href="#" class="btn btn-outline" style="color:#F7F3EE; border-color:rgba(255,255,255,0.25)">Learn More</a>
-  </div> -->
+  <div class="hero-ctas">
+    <a href="https://tuneupnutrition.practicebetter.io/#/698e48b99e6bf27f525e6711/bookings?s=69a21982674a64c3206a7bc1" class="btn btn-primary">Book Discovery Call</a>
+  </div>
 </section>
 
 <footer>
   <p style="font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:var(--accent); letter-spacing:0.1em;">Tune Up Nutrition</p>
   <p>© 2025 Tune Up Nutrition Coaching. All rights reserved.</p>
 </footer>
-
-<script type="text/javascript" src="https://cdn.practicebetter.io/assets/js/booking.widget.js"></script>
 
 <script>
   const reveals = document.querySelectorAll('.reveal');

@@ -79,7 +79,6 @@
     .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.5rem, 9vw, 9rem); line-height: 0.9; letter-spacing: 0.04em; color: var(--white); opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
     .hero-title span { color: var(--accent); }
     .hero-sub { margin-top: 1.8rem; font-size: 1rem; font-weight: 300; color: var(--gray); line-height: 1.7; max-width: 46ch; opacity: 0; animation: fadeUp 0.7s 0.48s forwards; }
-    .hero-cta { margin-top: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.6s forwards; }
 
     /* ── LADDER INTRO ── */
     .ladder-intro {
@@ -117,11 +116,9 @@
       border-radius: 4px;
       overflow: hidden;
       background: linear-gradient(160deg, #465362 0%, #36384C 100%);
-      display: flex; align-items: flex-end; padding: 1.5rem;
-      position: sticky;
-      top: 7rem;
     }
-    .service-image .placeholder-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+    .service-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .service-image .placeholder-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); padding: 1.5rem; display: flex; align-items: flex-end; height: 100%; }
 
     .service-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5rem); letter-spacing: 0.04em; line-height: 0.95; margin-bottom: 0.5rem; }
     .service-duration { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem; display: block; }
@@ -217,11 +214,10 @@
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">Tune Up Nutrition</a>
+  <a href="/" class="nav-logo">Tune Up Nutrition</a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
+    <li><a href="/">Home</a></li>
     <li><a href="services.html" class="active">Services</a></li>
-    <li><a href="index.html#about">About</a></li>
   </ul>
 </nav>
 
@@ -232,7 +228,6 @@
     <p class="hero-eyebrow">Services</p>
     <h1 class="hero-title">Performance <span>Nutrition.</span> Dialed.</h1>
     <p class="hero-sub">Your fitness is built in training. Your performance is built in fueling. Most endurance athletes train with structure but fuel with guesswork. At Tune Up Nutrition, we treat your nutrition like your drivetrain: clean, aligned, and optimized for the terrain ahead.</p>
-
   </div>
 </section>
 
@@ -245,7 +240,7 @@
 <!-- FULL SYSTEM OVERHAUL -->
 <section class="service-block bg-white reveal" id="services">
   <div class="service-image">
-    <span class="placeholder-label">Full Overhaul image</span>
+    <img src="images/6.jpeg" alt="Cyclist on gravel road in the mountains" style="object-position: center;" />
   </div>
   <div class="service-content">
     <p class="section-label">1:1 Performance Nutrition</p>
@@ -279,15 +274,15 @@
     </div>
 
     <div class="service-cta">
-      <a href="#" class="btn btn-primary">Apply Here!</a>
+      <a href="https://f5pzj6dgs61.typeform.com/to/qWhhoIMT" class="btn btn-primary">Apply Here!</a>
     </div>
   </div>
 </section>
 
 <!-- PRECISION RACE TUNE UP -->
 <section class="service-block bg-dark reverse reveal">
-  <div class="service-image" style="background: linear-gradient(160deg, #BFB8A9 0%, #465362 100%);">
-    <span class="placeholder-label">Race Tune Up image</span>
+  <div class="service-image">
+    <img src="images/fullsystem.jpg" alt="Cyclist riding through a forest trail" style="object-position: center;" />
   </div>
   <div class="service-content">
     <p class="section-label">Targeted Support</p>
@@ -298,7 +293,7 @@
 
     <div class="tier-grid">
       <div class="tier-card tier-foundations">
-        <span class="tier-tag">Foundations</span>
+        <span class="tier-tag">Race Tune-Up</span>
         <h3>Foundations</h3>
         <ul class="includes-list light-list">
           <li>Initial strategy session</li>
@@ -310,7 +305,7 @@
         <p class="tier-note">Best for athletes who want clarity and consistency heading into race season.</p>
       </div>
       <div class="tier-card tier-performance">
-        <span class="tier-tag">Performance</span>
+        <span class="tier-tag">Race Tune-Up</span>
         <h3>Performance</h3>
         <ul class="includes-list light-list">
           <li>Full nutrition assessment</li>
@@ -324,10 +319,9 @@
       </div>
     </div>
     <div class="tier-grid" style="margin-top: 1rem;">
-      <a href="#" class="btn btn-outline" style="width:100%; justify-content:center;">Book Now</a>
-      <a href="#" class="btn btn-outline" style="width:100%; justify-content:center;">Book Now</a>
+      <a href="https://tuneupnutrition.practicebetter.io/#/698e48b99e6bf27f525e6711/bookings?p=69a21f668379a5a8f357f87c" class="btn btn-outline" style="width:100%; justify-content:center;">Book Foundations Now</a>
+      <a href="https://tuneupnutrition.practicebetter.io/#/698e48b99e6bf27f525e6711/bookings?p=69a220f78379a5a8f3581e01" class="btn btn-outline" style="width:100%; justify-content:center;">Book Performance Now</a>
     </div>
-
   </div>
 </section>
 
@@ -335,7 +329,7 @@
 <section class="micro-adjust reveal">
   <div class="micro-adjust-inner">
     <div class="service-content">
-      <p class="section-label">Quick Wins</p>
+      <p class="section-label" style="color: var(--accent);">Quick Wins</p>
       <h2>Race Day Micro-Adjust</h2>
       <span class="service-duration" style="color: var(--stone);">Single Session Fueling Tune-Up</span>
       <p>For athletes who need a strategic refinement before race day.</p>
@@ -364,11 +358,11 @@
       </div>
 
       <div class="service-cta">
-        <a href="#" class="btn btn-outline">Book Session</a>
+        <a href="https://tuneupnutrition.practicebetter.io/#/698e48b99e6bf27f525e6711/bookings?s=69a493d4c206c531a7cfa16d" class="btn btn-outline">Book a Micro-Adjust Now</a>
       </div>
     </div>
-    <div class="service-image" style="background: linear-gradient(160deg, #465362 0%, #36384C 100%); position: sticky; top: 7rem;">
-      <span class="placeholder-label">Micro Adjust image</span>
+    <div class="service-image">
+      <img src="images/performance.jpeg" alt="Cyclists racing on gravel" style="object-position: center top;" />
     </div>
   </div>
 </section>
@@ -378,7 +372,7 @@
   <p class="section-label" style="text-align:center;">Not Sure Which Tune Up You Need?</p>
   <h2>Schedule a <span>Fit Call</span></h2>
   <p>We'll determine the best option for your training, goals, and timeline — no pressure, just clarity.</p>
-  <a href="#" class="btn btn-accent">Schedule a 30-Minute Fit Call</a>
+  <a href="https://tuneupnutrition.practicebetter.io/#/698e48b99e6bf27f525e6711/bookings?s=69a21982674a64c3206a7bc1" class="btn btn-accent">Schedule a 30-Minute Fit Call</a>
 </section>
 
 <!-- FOOTER -->
