@@ -1,0 +1,46 @@
+---
+layout: blog
+---
+{%- assign words = content | number_of_words -%}
+<header class="post-hero">
+  <div class="post-hero-inner">
+    <a href="/blog/" class="post-back">← All posts</a>
+    <p class="post-meta">
+      {%- if page.category %}<span class="post-category">{{ page.category }}</span>{% endif -%}
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%B %-d, %Y' }}</time>
+      <span>{{ words | divided_by: 220 | at_least: 1 }} min read</span>
+    </p>
+    <h1>{{ page.title }}</h1>
+  </div>
+</header>
+
+{% if page.image %}
+<div class="post-cover"><img src="{{ page.image }}" alt="{{ page.image_alt | default: '' }}" /></div>
+{% endif %}
+
+<article class="post-body">
+  {{ content }}
+</article>
+
+<div class="post-author">
+  <img src="/images/taylor.jpeg" alt="Taylor Brower, RD" />
+  <div>
+    <strong>{{ page.author | default: site.author }}</strong>
+    <span>Registered Dietitian & Endurance Athlete</span>
+  </div>
+</div>
+
+<div class="post-nav" role="navigation" aria-label="More posts">
+  {%- if page.previous %}
+  <a href="{{ page.previous.url }}" class="prev"><small>← Older</small>{{ page.previous.title }}</a>
+  {%- endif %}
+  {%- if page.next %}
+  <a href="{{ page.next.url }}" class="next"><small>Newer →</small>{{ page.next.title }}</a>
+  {%- endif %}
+</div>
+
+<section class="post-cta">
+  <h2>Ready for a <span>Tune Up?</span></h2>
+  <p>Book a free discovery call and we'll map out exactly what your training is missing.</p>
+  <a href="https://tuneupnutrition.practicebetter.io/#/698e48b99e6bf27f525e6711/bookings?s=69a21982674a64c3206a7bc1" class="btn btn-primary">Book Discovery Call</a>
+</section>

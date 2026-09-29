@@ -1,0 +1,62 @@
+---
+layout: blog
+title: Blog
+description: Fueling, hydration and recovery for endurance athletes, from Registered Dietitian Taylor Brower.
+---
+<header class="blog-header">
+  <p class="section-label">The Tune Up Blog</p>
+  <h1>Fuel <span>Notes</span></h1>
+  <div class="accent-line"></div>
+  <p>Practical, evidence-based fueling, hydration and recovery strategies for endurance athletes.</p>
+</header>
+
+<main class="blog-archive">
+  {%- assign latest = site.posts.first -%}
+  {%- if latest -%}
+  <a href="{{ latest.url }}" class="featured-post">
+    <div class="post-card-image">
+      {%- if latest.image %}<img src="{{ latest.image }}" alt="" />{% endif -%}
+    </div>
+    <div class="featured-post-body">
+      <p class="post-meta">
+        <span class="post-category">Latest{% if latest.category %} · {{ latest.category }}{% endif %}</span>
+        <time datetime="{{ latest.date | date_to_xmlschema }}">{{ latest.date | date: '%b %-d, %Y' }}</time>
+      </p>
+      <h2>{{ latest.title }}</h2>
+      <p class="post-excerpt">{{ latest.excerpt | strip_html | truncatewords: 40 }}</p>
+      <span class="card-arrow">Read the post →</span>
+    </div>
+  </a>
+  {%- endif -%}
+
+  {%- assign older = site.posts | slice: 1, site.posts.size -%}
+  {%- if older.size > 0 -%}
+  {%- assign categories = older | map: 'category' | compact | uniq | sort -%}
+  {%- if categories.size > 1 %}
+  <div class="blog-filters" role="group" aria-label="Filter posts by category">
+    <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+    {%- for c in categories %}
+    <button class="filter-chip" data-filter="{{ c | slugify }}" aria-pressed="false">{{ c }}</button>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  <div class="post-grid">
+    {%- for post in older %}
+    {% include post-card.html post=post %}
+    {%- endfor %}
+  </div>
+  {%- elsif latest == nil -%}
+  <p class="blog-empty">No posts yet — check back soon.</p>
+  {%- endif %}
+</main>
+
+<script>
+  const chips = document.querySelectorAll('.filter-chip');
+  const cards = document.querySelectorAll('.post-grid .post-card');
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    const f = chip.dataset.filter;
+    chips.forEach(c => c.setAttribute('aria-pressed', c === chip));
+    cards.forEach(card => { card.hidden = f !== 'all' && card.dataset.category !== f; });
+  }));
+</script>

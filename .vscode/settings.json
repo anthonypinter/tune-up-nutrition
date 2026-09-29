@@ -1,0 +1,5 @@
+{
+  // Live Server shows the Jekyll build output, not the raw templates.
+  // Keep `jekyll serve` (or `jekyll build --watch`) running so _site stays up to date.
+  "liveServer.settings.root": "/_site"
+}

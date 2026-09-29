@@ -1,3 +1,6 @@
+---
+# Front matter lets Jekyll render the latest blog posts below.
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tune Up Nutrition</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/css/post-card.css"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -103,6 +107,11 @@
     .about-content p { font-size: 1rem; font-weight: 300; color: var(--mid); line-height: 1.8; margin-bottom: 1rem; }
     .about-image-wrap { position: relative; height: 580px; border-radius: 4px; overflow: hidden; }
 
+    .blog-section { background: var(--white); color: var(--black); padding: 8rem 5vw; }
+    .blog-section-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: 4rem; }
+    .blog-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 6vw, 6rem); letter-spacing: 0.04em; line-height: 0.95; }
+    .blog-section .btn-outline { color: var(--black); border-color: rgba(54,56,76,0.25); flex-shrink: 0; }
+
     .footer-cta { background: var(--black); padding: 8rem 5vw; text-align: center; }
     .footer-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 7vw, 7rem); line-height: 0.9; letter-spacing: 0.04em; }
     .footer-cta h2 span { color: var(--accent); }
@@ -135,6 +144,8 @@
       .card p { font-size: 1rem; }
       .about-section { padding: 10rem 7vw; gap: 8rem; }
       .about-content h2 { font-size: clamp(5rem, 6vw, 8rem); }
+      .blog-section { padding: 10rem 7vw; }
+      .blog-section h2 { font-size: clamp(5rem, 6vw, 8rem); }
       .footer-cta { padding: 10rem 7vw; }
       .footer-cta h2 { font-size: clamp(5rem, 8vw, 10rem); }
       .footer-cta p { font-size: 1.15rem; max-width: 50ch; }
@@ -149,6 +160,7 @@
       .cards-grid { grid-template-columns: 1fr 1fr; }
       .helps-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
       .train-hard-body { gap: 1rem; }
+      .blog-section-header { flex-direction: column; align-items: flex-start; }
     }
 
     @media (max-width: 600px) {
@@ -173,6 +185,8 @@
       .cards-grid { grid-template-columns: 1fr; }
       .helps-section { padding: 5rem 5vw; }
       .helps-section h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+      .blog-section { padding: 5rem 5vw; }
+      .blog-section h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
       .footer-cta { padding: 5rem 5vw; }
       .footer-cta h2 { font-size: clamp(2.5rem, 10vw, 5rem); }
       .footer-cta .hero-ctas { flex-direction: column; }
@@ -185,9 +199,10 @@
 
 <nav>
   <a href="/" class="nav-logo" style="text-decoration: none;">Tune Up Nutrition</a>
-  <!-- <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-  </ul> -->
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/blog/">Blog</a></li>
+  </ul>
 </nav>
 
 <section class="hero">
@@ -250,13 +265,14 @@
       <p>Structured, data-informed fueling support.</p>
       <span class="card-arrow">Book a Discovery Call →</span>
     </a>
-    <div class="card reveal" style="transition-delay:0.1s; cursor:default;">
+    <a href="https://l.bttr.to/viIpK" class="card reveal" style="transition-delay:0.1s">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
       </div>
       <h3>Online Course</h3>
-      <p>Coming soon!</p>
-    </div>
+      <p>The Gravel Performance Nutrition Course.</p>
+      <span class="card-arrow">Learn more →</span>
+    </a>
     <a href="https://f5pzj6dgs61.typeform.com/to/dePrVEsJ" class="card reveal" style="transition-delay:0.2s">
       <div class="card-icon">
         <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
@@ -280,6 +296,23 @@
     <img src="images/taylor.jpeg" alt="Taylor Brower, RD" style="width:100%; height:100%; object-fit:cover; object-position:center top;" />
   </div>
 </section>
+
+{% if site.posts.size > 0 %}
+<section class="blog-section" id="blog">
+  <div class="blog-section-header reveal">
+    <div>
+      <p class="section-label">From the Blog</p>
+      <h2>Fuel Notes</h2>
+    </div>
+    <a href="/blog/" class="btn btn-outline">View all posts →</a>
+  </div>
+  <div class="post-grid">
+    {% for post in site.posts limit:3 %}
+    {% include post-card.html post=post %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
 
 <section class="footer-cta reveal">
   <h2>Ready for a <span>Tune Up?</span></h2>

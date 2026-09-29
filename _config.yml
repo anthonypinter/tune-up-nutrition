@@ -1,0 +1,24 @@
+title: Tune Up Nutrition
+description: Evidence-based fueling strategies for endurance athletes.
+url: https://tuneupsportsnutrition.com
+author: Taylor Brower
+timezone: America/Denver
+
+# Blog posts live at /blog/<slug>/
+permalink: /blog/:title/
+
+# Both plugins are on the GitHub Pages allowlist — no extra setup needed.
+# jekyll-feed publishes an RSS feed at /feed.xml
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+
+exclude:
+  - index-old.html
+  - test.html
+  - footer-content.html
+  - README.md

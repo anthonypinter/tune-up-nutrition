@@ -1,0 +1,6 @@
+_site/
+.jekyll-cache/
+.sass-cache/
+blog-import/
+# Full-size stock originals; the site uses resized copies
+images/blog/AdobeStock_*
